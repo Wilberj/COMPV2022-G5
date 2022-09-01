@@ -1,0 +1,12 @@
+D:\SistemaTiendaRopa\CAPA_DATOS\bin\Release\net5.0\CAPA_DATOS.deps.json
+D:\SistemaTiendaRopa\CAPA_DATOS\bin\Release\net5.0\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_DATOS\bin\Release\net5.0\ref\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_DATOS\bin\Release\net5.0\CAPA_DATOS.pdb
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Release\net5.0\CAPA_DATOS.csproj.AssemblyReference.cache
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Release\net5.0\CAPA_DATOS.GeneratedMSBuildEditorConfig.editorconfig
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Release\net5.0\CAPA_DATOS.AssemblyInfoInputs.cache
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Release\net5.0\CAPA_DATOS.AssemblyInfo.cs
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Release\net5.0\CAPA_DATOS.csproj.CoreCompileInputs.cache
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Release\net5.0\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Release\net5.0\ref\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Release\net5.0\CAPA_DATOS.pdb

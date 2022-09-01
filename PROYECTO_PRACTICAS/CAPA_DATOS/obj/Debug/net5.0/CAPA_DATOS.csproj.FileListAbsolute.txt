@@ -1,0 +1,71 @@
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.deps.json
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.AssemblyReference.cache
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfoInputs.cache
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfo.cs
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.CoreCompileInputs.cache
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\source\repos\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.pdb
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.deps.json
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.AssemblyReference.cache
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfoInputs.cache
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfo.cs
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.CoreCompileInputs.cache
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.pdb
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.deps.json
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfoInputs.cache
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfo.cs
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.CoreCompileInputs.cache
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.pdb
+D:\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.deps.json
+D:\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\ref\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.pdb
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.AssemblyReference.cache
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.GeneratedMSBuildEditorConfig.editorconfig
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfoInputs.cache
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfo.cs
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.CoreCompileInputs.cache
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\ref\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.pdb
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.deps.json
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\bin\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.AssemblyReference.cache
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.GeneratedMSBuildEditorConfig.editorconfig
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfoInputs.cache
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfo.cs
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.CoreCompileInputs.cache
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.dll
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.pdb
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.deps.json
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\bin\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.AssemblyReference.cache
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfoInputs.cache
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.AssemblyInfo.cs
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.csproj.CoreCompileInputs.cache
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\ref\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_DATOS\obj\Debug\net5.0\CAPA_DATOS.pdb

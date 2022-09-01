@@ -1,0 +1,15 @@
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Release\net5.0\CAPA_NEGOCIO.deps.json
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Release\net5.0\CAPA_NEGOCIO.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Release\net5.0\ref\CAPA_NEGOCIO.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Release\net5.0\CAPA_NEGOCIO.pdb
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Release\net5.0\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Release\net5.0\CAPA_DATOS.pdb
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\CAPA_NEGOCIO.csproj.AssemblyReference.cache
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\CAPA_NEGOCIO.GeneratedMSBuildEditorConfig.editorconfig
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\CAPA_NEGOCIO.AssemblyInfoInputs.cache
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\CAPA_NEGOCIO.AssemblyInfo.cs
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\CAPA_NEGOCIO.csproj.CoreCompileInputs.cache
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\CAPA_NEGOCIO.csproj.CopyComplete
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\CAPA_NEGOCIO.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\ref\CAPA_NEGOCIO.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Release\net5.0\CAPA_NEGOCIO.pdb

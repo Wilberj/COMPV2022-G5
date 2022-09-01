@@ -1,0 +1,88 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.CatViewMarcaModel
+@{
+}
+<script type="module">
+    import CreateTable from "../js/TableComponent.js";
+    const CargarDatos = async () => {
+        let UrlP = "../api/ValuesControllerMarca/GetMarca";
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        console.log(response);
+        CreateTable(response, TableData, FunctionEdit);
+    }
+    const FunctionEdit = async (Item) => {
+        TxtIdMarca.value = Item.idMarca;
+        TxtMarca.value = Item.marca;
+        TxtDescripcionMarca.value = Item.descripcion;
+        DropEstado.value = Item.estado;
+    }
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            const ObjInst = {
+                IdMarca: TxtIdMarca.value,
+                Marca: TxtMarca.value,
+                Descripcion: TxtDescripcionMarca.value,
+               /* crear condicion o poner valores numericos en la lista*/
+                Estado: DropEstado.value
+            }
+            let Url = "../api/ValuesControllerMarca/SaveMarca";
+            let response = await fetch(Url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                TxtIdMarca.value = "-1";
+                TxtMarca.value = "";
+                TxtDescripcionMarca.value = "";
+            }           
+        }
+        //Cargar Categorias
+        CargarDatos();
+    }
+</script>
+<div class="FrmContainer">
+    <div hidden="true">
+        Id Marca:
+        <input class="TxtForm" type="number" id="TxtIdMarca" value="-1" />
+    </div>
+    <div>
+        Marca:
+        <input class="TxtForm" type="text" id="TxtMarca" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Descripcion:
+        <input class="TxtForm" type="text" id="TxtDescripcionMarca" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Estado:
+        <select class="TxtForm" id="DropEstado">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+    </div>
+</div>
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+    </div>
+</div>
+<table id="TableData" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

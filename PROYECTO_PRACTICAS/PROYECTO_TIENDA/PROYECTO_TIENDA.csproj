@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-PROYECTO_TIENDA-7D72D48A-4C4A-40F6-8709-625C0CC97037</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CAPA_NEGOCIO\CAPA_NEGOCIO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Catalogos\CatViewInventario.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Image\almacen.png" />
+    <None Include="wwwroot\Image\almacen_w.png" />
+    <None Include="wwwroot\Image\bolsa-de-la-compra.png" />
+    <None Include="wwwroot\Image\bolsa-de-la-compra_w.png" />
+    <None Include="wwwroot\Image\catalogo.png" />
+    <None Include="wwwroot\Image\catalogo_w.png" />
+    <None Include="wwwroot\Image\cupon.png" />
+    <None Include="wwwroot\Image\cupon_w.png" />
+    <None Include="wwwroot\Image\home-icon-silhouette.png" />
+    <None Include="wwwroot\Image\home-icon-silhouette_w.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Catalogos\CatViewInventario.cshtml" />
+  </ItemGroup>
+
+</Project>

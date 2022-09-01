@@ -1,0 +1,103 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.CatViewClientesModel
+@{
+}
+<script type="module">
+    import CreateTable from "../js/TableComponent.js";
+    const CargarDatos = async () => {
+        let UrlP = "../api/ValuesControllerClientes/GetCliente";
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        console.log(response);
+        CreateTable(response, TableData, FunctionEdit);
+    }
+    const FunctionEdit = async (Item) => {
+        TxtIdCliente.value = Item.idCliente;
+        TxtNombres.value = Item.nombres;
+        TxtApellidos.value = Item.apellidos;
+        TxtCelular.value = Item.celular;
+        TxtDireccion.value = Item.direccion;
+        DropEstado.value = Item.estado;
+    }
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            const ObjInst = {
+                IdCliente: TxtIdCliente.value,
+                Nombres: TxtNombres.value,
+                Apellidos: TxtApellidos.value,
+                Celular: TxtCelular.value,
+                Direccion: TxtDireccion.value,
+                Estado: DropEstado.value
+            }
+            let Url = "../api/ValuesControllerClientes/SaveClientes";
+            let response = await fetch(Url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                TxtIdCliente.value = "-1";
+                TxtNombres.value = "";
+                TxtApellidos.value = "";
+                TxtCelular.value = "";
+                TxtDireccion.value = "";
+               
+            }
+        }
+        //Cargar Categorias
+        CargarDatos();
+    }
+</script>
+
+<div class="FrmContainer">
+    <div hidden="true">
+        Id Cliente:
+        <input class="TxtForm" type="number" id="TxtIdCliente" value="-1" />
+    </div>
+    <div>
+        Nombres:
+        <input class="TxtForm" type="text" id="TxtNombres" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Apellidos:
+        <input class="TxtForm" type="text" id="TxtApellidos" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Celular:
+        <input class="TxtForm" type="number" id="TxtCelular" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Direccion:
+        <input class="TxtForm" type="text" id="TxtDireccion" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Estado:
+        <select class="TxtForm minimal" id="DropEstado">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+    </div>
+</div>
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+    </div>
+</div>
+<table id="TableData" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

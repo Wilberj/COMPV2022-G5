@@ -1,0 +1,115 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.Reportes.ReporteInventarioModel
+@{
+}
+<script type="module">
+    //import CreateTable from '../js/TableComponent.js';
+    //import CreateTable from '../../../js/TableComponent.js'
+    import TableInforme from '../../../js/Reporte.js';
+
+    const CargarDatos = async () => {
+        // let UrlP = "../api/ValuesControllerInventario/TraerInforme";
+        let UrlP = "../../api/ValuesControllerInventario/TraerInforme";
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+
+        response = await response.json();
+        console.log(response);
+        //CARGA IVENTARIO
+        TableInforme(response, TableInventarioR);
+    }
+        //CargarDatos();
+
+        
+
+    window.onload = async () => {
+        CargarDatos();
+        BtnUpdate.onclick = () => {
+            CargarDatos();
+        }
+        //BtnPrint.onclick = () => {
+        //    const PrintNode = Page.innerHTML;
+        //    const ventimp = window.open(' ', 'popimpr');
+        //    ventimp.document.write(PrintNode);
+        //    ventimp.document.close();
+        //    ventimp.print();
+        //    ventimp.close();
+        //}
+    }
+
+
+
+</script>
+
+<div>
+    <h2>
+        Que pasa aqui.
+    </h2>
+</div>
+
+<div class="FrmContainer">
+    <input type="date" id="Fecha1" value="1990-01-01" />
+    <input type="date" id="Fecha2" value="2022-01-01" />
+</div>
+<div class="FrmContainer">
+    <input class="BTN BTNOk2" type="button" id="BtnPrint" value="Imprimir" />
+    <input class="BTN BTNOk2" type="button" id="BtnUpdate" value="Actualizar" />
+</div>
+
+<div class="InformeContainer">
+    <div class="page" id="Page">
+        <style>
+            .InformeContainer {
+                background-color: #b9b9b9;
+                padding: 20px;
+                height: 600px;
+                overflow: auto;
+                border: solid 2px #888;
+            }
+
+            .page {
+                background-color: #fff;
+                width: 17cm;
+                height: 25.7cm;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 0.5cm;
+                box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+                padding: 1cm 2cm;
+            }
+
+            h1, h4 {
+                text-align: center;
+            }
+
+            .TableInforme {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+
+                .TableInforme td, .TableInforme th {
+                    border-bottom: solid 1px #b9b9b9;
+                }
+        </style>
+        <section>
+            <h1>
+                Informe
+            </h1>
+            <h4 id="labelSubtitle">Informe de Compras por fechas</h4>
+        </section>
+        <table id="TableInventarioR" class="TableInforme">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <hr />
+        <label id="LabelTotal"> Total: </label>
+    </div>
+</div>
+

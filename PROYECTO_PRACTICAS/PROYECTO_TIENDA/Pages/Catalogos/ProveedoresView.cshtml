@@ -1,0 +1,125 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.CatManageModel
+@{
+
+}
+<script type="module">
+    import CreateTable from '../js/TableComponent.js';
+    //import CreateDropDown from '../js/DropDownComponent.js';
+    const CargarDatos = async () => {
+        let UrlPV = "../api/Proveedor/GetProveedor";
+        let response = await fetch(UrlPV, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+
+        response = await response.json();
+        console.log(response);
+
+        CreateTable(response, TableData, FunctionEdit);
+        //CreateDropDown(response[1], DropDocumento, "idDocumento", "documento")
+    }
+
+    const FunctionEdit = async (Item) => {
+        TxtIdProveedor.value = Item.idProveedor;
+        TxtNombre.value = Item.nombres;
+        TxtApellido.value = Item.apellidos;
+        TxtCelular.value = Item.celular;
+        TxtCorreo.value = Item.correo;
+        TxtDireccion.value = Item.direccion;
+        DropEstado.value = Item.estado;
+    }
+
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            const ObjInst = {
+                IdProveedor: TxtIdProveedor.value,
+                Nombres: TxtNombre.value,
+                Apellidos: TxtApellido.value,
+                Celular: TxtCelular.value,
+                Correo: TxtCorreo.value,
+                Direccion: TxtDireccion.value,
+                Estado: DropEstado.value
+            }
+            let Url = "../api/Proveedor/InsertarProveedores";
+            let response = await fetch(Url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+            }
+        }
+
+       
+        CargarDatos();
+
+        TxtApellido.value = "";
+        TxtNombre.value = "";
+        TxtDireccion.value = "";
+        TxtCelular.value = "";
+        TxtCorreo.value = "";
+        TxtIdProveedor.value = "";
+
+
+    }
+</script>
+
+<div class="FrmContainer">
+
+    <div hidden="true">
+        Id Proveedor:
+        <input class="TxtForm" type="number" id="TxtIdProveedor" value="-1"/>
+    </div>
+    <div>
+        Nombre:
+        <input class="TxtForm" type="text" id="TxtNombre" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Apellidos:
+        <input class="TxtForm" type="text" id="TxtApellido" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Direccion:
+        <input class="TxtForm" type="text" id="TxtDireccion" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Correo:
+        <input class="TxtForm" type="text" id="TxtCorreo" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Numero de Celular:
+        <input class="TxtForm" type="number" id="TxtCelular" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Estado:
+        <select class="TxtForm" id="DropEstado">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+    </div>
+</div>
+@* Seran las cajas "botones" *@
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+    </div>
+</div>
+
+
+@* Tabla estatica de ejemplo, tiene que ser dinamica" *@
+<table id="TableData" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

@@ -1,0 +1,75 @@
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.deps.json
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.pdb
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.AssemblyReference.cache
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfoInputs.cache
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfo.cs
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CoreCompileInputs.cache
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CopyComplete
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+C:\Users\Martha\Desktop\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.pdb
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.deps.json
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.pdb
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.AssemblyReference.cache
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfoInputs.cache
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfo.cs
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CoreCompileInputs.cache
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CopyComplete
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+C:\Repos\GRUPO4-TiendaElHermano\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.pdb
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.deps.json
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.pdb
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.pdb
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.AssemblyReference.cache
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.GeneratedMSBuildEditorConfig.editorconfig
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfoInputs.cache
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfo.cs
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CoreCompileInputs.cache
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CopyComplete
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+D:\SistemaTiendaRopa\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.pdb
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.deps.json
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.dll
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.pdb
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.AssemblyReference.cache
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.GeneratedMSBuildEditorConfig.editorconfig
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfoInputs.cache
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfo.cs
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CoreCompileInputs.cache
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CopyComplete
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.dll
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+C:\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.pdb
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.AssemblyReference.cache
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfoInputs.cache
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.AssemblyInfo.cs
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CoreCompileInputs.cache
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.pdb
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.deps.json
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\ref\CAPA_NEGOCIO.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_NEGOCIO.pdb
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.dll
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\bin\Debug\net5.0\CAPA_DATOS.pdb
+C:\Users\Isabel Aguilar\Favorites\Documents\PROYECTO_PRACTICAS\CAPA_NEGOCIO\obj\Debug\net5.0\CAPA_NEGOCIO.csproj.CopyComplete

@@ -1,0 +1,88 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.CatViewModel
+@{
+}
+<script type="module">
+    import CreateTable from "../js/TableComponent.js";
+    const CargarDatos = async () => {
+        let UrlP = "../api/Values/GetCategoria";
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        console.log(response);
+        CreateTable(response, TableData, FunctionEdit);
+    }
+    const FunctionEdit = async (Item) => {
+        TxtIdCategoria.value = Item.idCategoria;
+        TxtNombre.value = Item.nombre;
+        TxtDescripcion.value = Item.descripcion;
+        DropEstado.value = Item.estado;
+    }
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            const ObjInst = {
+                IdCategoria: TxtIdCategoria.value,
+                Nombre: TxtNombre.value,
+                Descripcion: TxtDescripcion.value,
+                Estado: DropEstado.value
+            }
+            let Url = "../api/Values/SaveCategoria";
+            let response = await fetch(Url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                TxtIdCategoria.value = "-1";
+                TxtNombre.value = "";
+                TxtDescripcion.value = "";
+            }
+        }
+        //Cargar Categorias
+        CargarDatos();
+    }
+</script>
+
+<div class="FrmContainer">
+    <div hidden = "true">
+        IdCategoria:
+        <input class="TxtForm" type="number" id="TxtIdCategoria" value="-1" />
+    </div>
+    <div>
+        Nombre:
+        <input class="TxtForm" type="text" id="TxtNombre" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Descripcion:
+        <input class="TxtForm" type="text" id="TxtDescripcion" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Estado:
+        <select class="TxtForm" id="DropEstado">
+            <option value='Activo'>Activo</option>
+            <option value='Inactivo'>Inactivo</option>
+        </select>
+    </div>
+</div>
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+    </div>
+</div>
+<table id="TableData" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

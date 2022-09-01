@@ -1,0 +1,70 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.CatViewTallaModel
+@{
+}
+<script type="module">
+    import CreateTable from "../js/TableComponent.js";
+    const CargarDatos = async () => {
+        let UrlP = "../api/ValuesControllerTalla/GetTalla";
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        console.log(response);
+        CreateTable(response, TableData, FunctionEdit);
+    }
+    const FunctionEdit = async (Item) => {
+        TxtIdTalla.value = Item.idTalla;
+        TxtTalla.value = Item.talla;
+    }
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            const ObjInst = {
+                IdTalla: TxtIdTalla.value,
+                Talla: TxtTalla.value
+            }
+            let Url = "../api/ValuesControllerTalla/SaveTalla";
+            let response = await fetch(Url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                TxtIdTalla.value = "-1";
+                TxtTalla.value = "";
+            }
+        }
+        CargarDatos();
+    }
+</script>
+<div class="FrmContainer">
+    <div hidden="true">
+        Id Talla:
+        <input class="TxtForm" type="number" id="TxtIdTalla" value="-1" />
+    </div>
+    <div>
+        Talla:
+        <input class="TxtForm" type="text" id="TxtTalla" placeholder="Propiedad..." />
+    </div>
+</div>
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+    </div>
+</div>
+<table id="TableData" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

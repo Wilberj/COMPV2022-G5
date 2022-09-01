@@ -1,0 +1,108 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.CatViewUsuarioModel
+@{
+}
+<script type="module">
+    import CreateTable from "../js/TableComponent.js";
+    import CreateDropDown from "../js/DropDownComponent.js";
+
+    const CargarDatos = async () => {
+        let UrlP = "../api/ValuesControllerUsuarios/TakeDataForUsuario";
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        console.log(response);
+
+        CreateTable(response[1], TableData, FunctionEdit);
+        CreateDropDown(response[0], DropRol, "idRol", "rol");
+        
+    }
+    const FunctionEdit = async (Item) => {
+        TxtIdUsuario.value = Item.idUsuario;
+        TxtUsuario.value = Item.usuario;
+        TxtContrasena.value = Item.contraseña;
+        DropRol.value = Item.idRol;
+        DropEstado.value = Item.estado;
+    }
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            const ObjInst = {
+                IdUsuario: TxtIdUsuario.value,
+                Usuario: TxtUsuario.value,
+                Contraseña: TxtContrasena.value,
+                IdRol: DropRol.value,
+                Estado: DropEstado.value
+            }
+            let Url = "../api/ValuesControllerUsuarios/SaveUsuarios";
+            let response = await fetch(Url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                TxtIdUsuario.value = "-1";
+                DropRol.value = "";
+                TxtUsuario.value = "";
+                TxtContrasena.value = "";
+                DropEstado.value = "";
+            }
+        }
+        //Cargar Categorias
+        CargarDatos();
+    }
+</script>
+
+<div class="FrmContainer">
+    <div hidden="true">
+        Id Usuario:
+        <input class="TxtForm" type="number" id="TxtIdUsuario" value="-1" />
+    </div>
+
+    <div>
+        Usuario:
+        <input class="TxtForm" type="text" id="TxtUsuario" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Contraseña:
+        <input class="TxtForm" type="text" id="TxtContrasena" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Rol:
+        <select class="TxtForm minimal" id="DropRol">
+            @*<option value="0">Seleccionar Rol</option>*@
+        </select>
+    </div>
+
+    <div>
+        Estado:
+        <select class="TxtForm" id="DropEstado">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+    </div>
+</div>
+
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+    </div>
+</div>
+<table id="TableData" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

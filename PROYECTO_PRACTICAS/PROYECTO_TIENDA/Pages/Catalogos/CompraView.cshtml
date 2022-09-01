@@ -1,0 +1,473 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.CatManageModel
+@{
+
+}
+<script type="module">
+    import CreateTable from '../js/TableComponent.js';
+    import CreateDropDown from '../js/DropDownComponent.js';
+    const DetallesCompra = [];
+    let Producto;
+    let compra;
+
+    const CargarDatos = async () => {
+        let UrlCompra = "../api/Compra/VerCompra";
+        let response = await fetch(UrlCompra, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        compra = response[0]
+
+        //CARGAR TODOS LAS LISTAS
+        console.log(response);
+
+        //CARGA TABLA COMPRA
+         CreateTable(response[0], TableCompra);//tabla compra
+
+        //TRAE PROVEEDOR
+        CreateDropDown(response[1], DropProveedor, "idProveedor", "nombres")
+
+        //TRAE EL INVENTARIO
+        Producto = response[3]; //inventario
+        CreateTable(Producto, TableProducto, FunctionSeleccionar, "Seleccionar");
+
+
+    }
+
+    //SELECCION DE ITEM DE INVENTARIO
+    const FunctionSeleccionar = async (Item) => {
+
+        Txtproducto.value = Item.idProducto;
+        Txtprecio.value = Item.precioCompra;
+        ModalFunction(ModalProducto)
+    }
+
+    //CALCULO DE PORCENTAJES
+    Txtcantidad.onkeyup = (ev) => {
+        txtsubtotal.value = Txtprecio.value * ev.target.value;
+        Txtiva.value = txtsubtotal.value * 0.15;
+        Txttotal.value = parseFloat(txtsubtotal.value) + parseFloat(Txtiva.value);
+    }
+
+    //TEXTO DE BUSQUEDA
+    TxtBusquedaCompra.onkeyup = (ev) => {
+        const parametro = ev.target.value;
+        const CompraFiltrados = compra.filter(x => x.descripcion.includes(parametro));
+        CreateTable(CompraFiltrados, TableCompra);
+    }
+
+
+    ////// TABLA PARA DETALLE
+    export default function CreateTableDetalle(Dataset = [], Table, TableFunction, BtnValue = "Eliminar") {
+        const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
+        const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
+        thead.innerHTML = "";
+        tbody.innerHTML = "";
+        Dataset.forEach((item, index) => {
+            const row = document.createElement("tr");//filas
+            for (var prop in item) {
+
+                if (index == 0) {
+
+                    const th = document.createElement("th");//encabezados
+                    th.innerText = prop;
+                    thead.append(th);
+                }
+                const td = document.createElement("td"); //tabledata
+                td.innerText = item[prop];
+                row.append(td);
+            }
+            if (index == 0) {
+                const th = document.createElement("th");
+                th.innerText = "Eliminar";
+                thead.append(th);
+
+            }
+            const tdAction = document.createElement("td");
+            const btn = document.createElement("input");
+            btn.type = "button";
+            btn.className = "BTN BTNOK";
+            btn.value = BtnValue;
+            btn.onclick = (obejetDet = {}) => {
+                obejetDet.target.parentNode.parentNode.remove();
+                const Eliminar = DetallesCompra.indexOf(obejetDet);
+                DetallesCompra.splice(Eliminar, 1);
+                console.log(DetallesCompra);
+            }
+            tdAction.append(btn);
+            row.append(tdAction);
+
+            tbody.append(row);
+        });
+    }
+
+
+    //EDITAR DETALLE
+    //const FuncionEditar = async (Item) => {
+    //    //ModalFunction(ModalDetalle);
+    //    const encontrarId = DetallesCompra.find(i => i.Producto == Item.Producto);
+    //    if (encontrarId=true) {
+    //        encontrarId.Producto = Txtproducto;
+    //        encontrarId.Cantidad = Txtcantidad;
+    //        encontrarId.Precio = Txtprecio;
+    //        encontrarId.Medida = Txtmedida;
+    //        encontrarId.SubTotal = txtsubtotal;
+    //        encontrarId.Iva = Txtiva;
+    //        encontrarId.Total = Txttotal;
+    //    }
+    //}
+
+
+    //GUARDAR LOS DETALLES
+
+    btnDetalle.onclick = async (Objdetalle = {}) => {
+        let cantidad = document.getElementById('Txtcantidad');
+        let producto = document.getElementById('Txtproducto');
+        //const encontrarId = DetallesCompra.find(i => i.Producto == Objdetalle.Producto);
+
+        if (cantidad.value === '' || producto.value === '') {
+            alert('Rellena el todos los campos')
+            //event.preventDefault();
+
+        } else {
+
+            //if (encontrarId == undefined || encontrarId == null) {
+            Objdetalle = {
+                IdProducto: Txtproducto.value,
+                Precio: Txtprecio.value,
+                Cantidad: Txtcantidad.value,
+                Medida: Txtmedida.value,
+                Subtotal: txtsubtotal.value,
+                IVA: Txtiva.value,
+                Descuento: TxtDescuento.value,
+                Total: Txttotal.value
+            }
+        }
+        DetallesCompra.push(Objdetalle);
+        console.log(DetallesCompra);
+        DetallesCompra.forEach((objeto) => {
+            CreateTableDetalle(DetallesCompra, TableCD);
+
+        })
+        // SUMA TOTAL DETALLES
+        function sumaTotales(DetallC) {
+            const suma = DetallC.map(D => D.Total).reduce((a, v) => parseInt(a) + parseInt(v), 1);
+            TxttotalC.value = suma;
+
+        }
+        sumaTotales(DetallesCompra);
+
+
+        //MODALDETALLE
+        ModalFunction(ModalDetalle);
+
+        Txtproducto.value = ""
+        Txtcantidad.value = ""
+        Txtprecio.value = ""
+        Txtiva.value = ""
+        txtsubtotal.value = ""
+        Txttotal.value = ""
+
+    }
+
+
+
+
+
+    //SALVAR COMPRA
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            let UrlCompra = "../api/Compra/GuardarCompra";
+            const ObjInst = {
+                IdCompra: TxtCompra.value,
+                Fecha: Txtfecha.value,
+                Descripcion: Txtdescripcion.value,
+                Proveedor: DropProveedor.value,
+                Total:TxttotalC.value,
+                Estado: DropEstado.value,
+                Detalles: DetallesCompra
+
+            }
+            let flag = true;
+            for (var prop in ObjInst) {
+                if (ObjInst[prop] == "") {
+                    flag = false;
+                    alert("la propiedad " + prop + " es requerida");
+                    break;
+                }
+            }
+
+            if (!flag) {
+                return;
+            }
+
+            let response = await fetch(UrlCompra, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                location.reload()
+            }
+
+            DropProveedor.value = 0;
+            Txtdescripcion.value = ""
+        }
+        CargarDatos();
+
+        BtnModalProducto.onclick = () => {
+            ModalFunction(ModalProducto);
+        }
+        BtnCerrarProducto.onclick = () => {
+            ModalFunction(ModalProducto);
+        }
+
+        BtnModalDetalle.onclick = () => {
+            ModalFunction(ModalDetalle);
+        }
+        BtnCerrarD.onclick = () => {
+            ModalFunction(ModalDetalle);
+        }
+    }
+
+
+</script>
+
+<div class="FrmContainer">
+
+    <div hidden="true">
+        IdCompra:
+        <input class="TxtForm" type="number" id="TxtCompra" placeholder="Propiedad..." value="-1" />
+    </div>
+    <div>
+        Fecha:
+        <input class="TxtForm" type="date" id="Txtfecha" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Descripcion:
+        <input class="TxtForm" type="text" id="Txtdescripcion" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Proveedor:
+        <select class="TxtForm" id="DropProveedor">
+            <option value="0">Seleccionar Proveedor</option>
+        </select>
+    </div>
+
+    <div>
+        Total:
+        <input class="TxtForm" type="number" id="TxttotalC" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Estado:
+        <select class="TxtForm" id="DropEstado">
+            <option value="1">Activo</option>
+            <option value="2">Inactivo</option>
+        </select>
+    </div>
+</div>
+
+@*formulario para detalle*@
+
+<div class="ModalContentDetalle" id="ModalDetalle">
+
+    <div class="FrmContainerDetalle">
+
+        <div style="display:flex;">
+            <div>
+                Producto:
+                <input class="TxtForm" type="number" id="Txtproducto" placeholder="Producto" disabled />
+            </div>
+
+            <input type="button" id="BtnModalProducto" class="BTN BTNOK2" value="Insertar Producto" style="height:40px; margin-top:30px;margin-left:20px" />
+        </div>
+
+        <div>
+            Cantidad:
+            <input class="TxtForm" type="number" id="Txtcantidad" />
+        </div>
+
+        <div>
+            Medida:
+            <input class="TxtForm" type="text" id="Txtmedida" placeholder="Propiedad..." value="DOCENAS" disabled />
+        </div>
+
+        <div>
+            Precio:
+            <input class="TxtForm" type="number" id="Txtprecio" placeholder="Propiedad..." disabled />
+        </div>
+
+        <div>
+            Subtotal:
+            <input class="TxtForm" type="number" id="txtsubtotal" placeholder="Propiedad..." disabled />
+        </div>
+
+        <div>
+            IVA:
+            <input class="TxtForm" type="number" id="Txtiva" placeholder="Propiedad..." disabled />
+        </div>
+
+        <div>
+            Descuento:
+            <input class="TxtForm" type="number" id="TxtDescuento" placeholder="Propiedad..." />
+        </div>
+
+        <div>
+            Total:
+            <input class="TxtForm" type="number" id="Txttotal" placeholder="Propiedad..." disabled />
+        </div>
+
+        <div>
+            <button class="BTN BTNOK2" id="btnDetalle">Guardar Detalles</button>
+            <input class="BTN BTNOK2" type="button" id="BtnCerrarD" value="Cerrar" style="margin-top:30px" />
+
+        </div>
+
+    </div>
+
+
+</div>
+
+@*botones*@
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+        <input class="BTN BTNOK2" type="button" id="BtnModalDetalle" value="Insertar Detalle" style="margin-right:120px" />
+    </div>
+
+
+</div>
+
+@*Creacion de tablas*@
+@*TABLA PARA WUE INSERTA DETALLE*@
+<table id="TableDetalle" class="FrmTable" hidden="true">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@*TABLA PAR VER LA COMPRA*@
+<div>
+    <input type="text" class="TxtForm" id="TxtBusquedaCompra" placeholder="Buscar..." value="" />
+    <table id="TableCompra" class="FrmTable">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+@*TABLA PARA VER EL DETALLLE*@
+<table id="TableCD" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@*TABLA PARA EL MODAL*@
+<div class="ModalContent" id="ModalProducto">
+    <div class="ContainerForm" style="width:max-content">
+        @*<input type="text" id="TxtBusquedaProducto" placeholder="Buscar..." value="" />*@
+        <table id="TableProducto" class="FrmTable">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <div class="FrmContainer">
+            <div>
+                <input class="BTN BTNOK2" type="button" id="BtnCerrarProducto" value="Cerrar" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*/*traer el inventario a la lista*/*@
+
+
+@*var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+
+    if ( !expr.test(correo) ){                                                            //COMPRUEBA MAIL
+        alert("Error: La dirección de correo " + correo + " es incorrecta.");
+        return false;
+    }*@
+
+@*//TEXTO DE BUSQUEDA
+    //TxtBusquedaProducto.onchange = (ev) => {
+    //    const parametro = ev.target.value;
+    //    const ProductosFiltrados = Producto.filter(x => x.nombreProducto.includes(parametro));
+    //    CreateTable(ProductosFiltrados, TableProducto, FunctionSeleccionar, "Seleccionar");
+    //}
+
+    //SALVAR DETALLE COMPRA
+
+    //const FuncionEditar = async (Item) => {
+    //    ModalFunction(ModalDetalle);
+    //    Txtproducto.value = Item.Producto;
+    //    Txtcantidad.value= Item.Cantidad;
+    //    Txtprecio.value = Item.Precio;
+    //    Txtmedida.value = Item.Medida;
+    //    txtsubtotal.value=Item.Subtotal;
+    //    Txtiva.value = Item.IVA;
+    //    Txttotal.value=Item.Total;
+    //}*@
+
+@*//btnDetalle.onclick = async (Objdetalle = {}) => {
+    //        const encontrarId = DetallesCompra.find(i => i.Producto == Objdetalle.Producto);
+    //    if (encontrarId == undefined || encontrarId == null) {
+    //        Objdetalle = {
+    //            Producto: Txtproducto.value,
+    //            Precio: Txtprecio.value,
+    //            Cantidad: Txtcantidad.value,
+    //            Medida: Txtmedida.value,
+    //            Subtotal: txtsubtotal.value,
+    //            IVA: Txtiva.value,
+    //            Total: Txttotal.value
+    //        }
+    //        DetallesCompra.push(Objdetalle);
+    //        DetallesCompra.forEach((objeto) => {
+    //            CreateTable(DetallesCompra, TableCD, FuncionEditar);
+    //        })
+
+
+
+    //    }
+
+    //    // SUMA TOTAL DETALLES
+    //    function sumaTotales(DetallC) {
+    //        const suma = DetallC.map(D => D.Total).reduce((a, v) => a + v, 0);
+    //        TxttotalC.value = suma;
+
+    //    }
+    //    sumaTotales(DetallesCompra);
+
+
+    //    //MODALDETALLE
+    //    ModalFunction(ModalDetalle);
+
+    //    Txtproducto.value = ""
+    //    Txtcantidad.value = ""
+    //    Txtprecio.value = ""
+    //    Txtiva.value = ""
+    //    txtsubtotal.value = ""
+    //    Txttotal.value = ""
+    //}
+    //  }*@

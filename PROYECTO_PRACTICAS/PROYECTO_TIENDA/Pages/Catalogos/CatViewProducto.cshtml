@@ -1,0 +1,114 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.CatViewProductoModel
+@{
+}
+<script type="module">
+    import CreateTable from "../js/TableComponent.js";
+    import CreateDropDown from '../js/DropDownComponent.js';
+    const CargarDatos = async () => {
+        let UrlP = "../api/ValuesControllerProducto/TakeDataForCategoria";
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        console.log(response);
+
+        CreateTable(response[0], TableData, FunctionEdit);
+        CreateDropDown(response[1], DropCategoria, "idCategoria", "nombre");
+    }
+    const FunctionEdit = async (Item) => {
+        TxtIdProducto.value = Item.idProducto;
+        TxtNombreProducto.value = Item.nombreProducto;
+        TxtDescripcionProducto.value = Item.descripcion;
+        DropCategoria.value = Item.idCategoria;
+        DropEstado.value = Item.estado;
+    }
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            const ObjInst = {
+                IdProducto: TxtIdProducto.value,
+                NombreProducto: TxtNombreProducto.value,
+                Descripcion: TxtDescripcionProducto.value,
+                IdCategoria: DropCategoria.value,
+                Estado: DropEstado.value
+            }
+
+            let flag = true;
+            for (var prop in ObjInst) {
+                if (ObjInst[prop] == "") {
+                    flag = false;
+                    alert("la propiedad " + prop + " es requerida");
+                    break;
+                }
+            }
+
+            if (!flag) {
+                return;
+            }
+
+            let Url = "../api/ValuesControllerProducto/SaveProducto";
+            let response = await fetch(Url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                window.location.reload();
+                /*CargarDatos();*/
+                //TxtIdProducto.value = "-1";
+                //TxtNombreProducto.value = "";
+                //TxtDescripcionProducto.value = "";
+            }
+        }
+        //Cargar Productos
+        CargarDatos();
+    }
+</script>
+<divdiv></divdiv>
+<div class="FrmContainer">
+    <div hidden="true">
+        Id Producto:
+        <input class="TxtForm" type="number" id="TxtIdProducto" value="-1" />
+    </div>
+    <div>
+        NombreProducto:
+        <input class="TxtForm" type="text" id="TxtNombreProducto" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Descripcion:
+        <input class="TxtForm" type="text" id="TxtDescripcionProducto" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Categoria:
+        <select class="TxtForm minimal" id="DropCategoria">
+            <option value="0">Seleccionar Categoria</option>
+        </select>
+    </div>
+    <div>
+        Estado:
+        <select class="TxtForm" id="DropEstado">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+    </div>
+</div>
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+    </div>
+</div>
+<table id="TableData" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
