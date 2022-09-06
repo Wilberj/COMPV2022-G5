@@ -24,7 +24,7 @@
     }
 
     const FunctionEdit = async (Item) => {
-        TxtIdProveedor.value = Item.idProveedor;
+        IdProveedor.value = Item.idProveedor;
         TxtNombre.value = Item.nombres;
         TxtApellido.value = Item.apellidos;
         TxtCelular.value = Item.celular;
@@ -36,11 +36,11 @@
     window.onload = async () => {
         BtnSave.onclick = async () => {
             const ObjInst = {
-                IdProveedor: TxtIdProveedor.value,
+                IdProveedor: IdProveedor.value,
                 Nombres: TxtNombre.value,
                 Apellidos: TxtApellido.value,
-                Celular: TxtCelular.value,
                 Correo: TxtCorreo.value,
+                Celular: TxtCelular.value,
                 Direccion: TxtDireccion.value,
                 Estado: DropEstado.value
             }
@@ -57,18 +57,20 @@
             if (response == true) {
                 alert("Datos Guardados");
                 CargarDatos();
+
+                TxtApellido.value = "";
+                TxtNombre.value = "";
+                TxtDireccion.value = "";
+                TxtCelular.value = "";
+                TxtCorreo.value = "";
+                TxtIdProveedor.value = "-1";
             }
         }
 
        
         CargarDatos();
 
-        TxtApellido.value = "";
-        TxtNombre.value = "";
-        TxtDireccion.value = "";
-        TxtCelular.value = "";
-        TxtCorreo.value = "";
-        TxtIdProveedor.value = "";
+        
 
 
     }
@@ -78,7 +80,7 @@
 
     <div hidden="true">
         Id Proveedor:
-        <input class="TxtForm" type="number" id="TxtIdProveedor" value="-1"/>
+        <input class="TxtForm" type="number" id="IdProveedor" value="-1" />
     </div>
     <div>
         Nombre:

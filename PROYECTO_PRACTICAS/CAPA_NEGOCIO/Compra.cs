@@ -44,12 +44,13 @@ namespace CAPA_NEGOCIO
                         NewId.Total = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Total;
                         NewId.TraerIdCompra(NewId);
 
-                        //NInventario InvenA = new NInventario();//instancia de inventario
-                        //var cantidadD = Convert.ToInt32( (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Cantidad); //cantidad insertada en el detalle
-                        //var ExistenciaActual = Convert.ToInt32(InvenA.StockActual); //igualando a stock actual de inventario
-                        //var stockActualizado = ExistenciaActual + cantidadD;// operacion para aumentar stock
-                        //var IdP = NewId.Producto; //id de este producto insertado en detalle
-                        //InvenA.ActStock(stockActualizado, IdP);
+                        NInventario InvenA = new NInventario();//instancia de inventario
+                        var InventarioCant = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Cantidad;
+                        var IdProducto = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).IdProducto;
+                        // //var ExistenciaActual = Convert.ToInt32(InvenA.StockActual); //igualando a stock actual de inventario
+                        // //var stockActualizado = ExistenciaActual + cantidadD;// operacion para aumentar stock
+                        // //var IdP = NewId.Producto; //id de este producto insertado en detalle
+                        InvenA.ActStock(InventarioCant, IdProducto);
                     }
                     return true;
                     // return SqlADOConexion.SQLM.InsertObject(TableName, Inst);

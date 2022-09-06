@@ -30,8 +30,6 @@
         //    const parametro = ev.target.value;
         //    const ProductosFiltrados = Producto.filter(x => x.nombreProducto.includes(parametro));
         //    CreateTable(ProductosFiltrados, TableProducto, FunctionSeleccionar, "Seleccionar");
-
-
         //}
        
             CreateDropDown(response[2], DropMarca, "idMarca", "marca");
@@ -105,6 +103,14 @@
                 if (response == true) {
                     alert("Datos Guardados");
                     window.location.reload();
+                    TxtCodigo.value = "";
+                    TxtIdInventario = "-1"
+                    TxtProducto.value=""
+                    TxtCodigo.value=""
+                    TxtPrecioCompra.value=""
+                    TxtPrecioVenta.value = ""
+                    TxtActual.value = ""
+                    TxtMedida.value=""
                 }
             }
             CargarDatos();
@@ -166,11 +172,11 @@
     </div>
     <div>
         Stock minimo:
-        <input class="TxtForm" type="number" id="TxtMinimo" placeholder="Propiedad..." />
+        <input class="TxtForm" type="number" id="TxtMinimo" placeholder="Propiedad..." value="10" disabled />
     </div>
     <div>
         Stock maximo:
-        <input class="TxtForm" type="number" id="TxtMaximo" placeholder="Propiedad..." />
+        <input class="TxtForm" type="number" id="TxtMaximo" placeholder="Propiedad..." value="200" disabled />
     </div>
     <div>
         Stock actual:

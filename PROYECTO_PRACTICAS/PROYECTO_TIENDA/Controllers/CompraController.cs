@@ -31,6 +31,12 @@ namespace PROYECTO_TIENDA.Controllers
             NInventario i = new NInventario();
             Response.Add(i.GetInventario(i));
 
+            MostrarInventario I = new MostrarInventario();
+            Response.Add(I.TraerInvProc(I));
+
+            VistaCmpraDetalle CD = new VistaCmpraDetalle();
+            Response.Add(CD.TraerCompraConProc(CD));
+
             return Response;
         }
 
