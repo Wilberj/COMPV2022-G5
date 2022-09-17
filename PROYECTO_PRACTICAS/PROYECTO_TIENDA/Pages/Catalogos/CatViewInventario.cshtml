@@ -26,10 +26,24 @@
         CreateTable(Producto, TableProducto, FunctionSeleccionar, "Seleccionar");
 
 
+<<<<<<< HEAD
         CreateDropDown(response[2], DropMarca, "idMarca", "marca");
         CreateDropDown(response[3], DropTalla, "idTalla", "talla");
         CreateDropDown(response[4], DropBodega, "idBodega", "descripcion");
         CreateDropDown(response[5], DropMedida, "idTransMedida", "equivalencia");
+=======
+        //TEXTO BUSQUEDA
+        //TxtBusquedaProducto.onchange = (ev) => {
+        //    const parametro = ev.target.value;
+        //    const ProductosFiltrados = Producto.filter(x => x.nombreProducto.includes(parametro));
+        //    CreateTable(ProductosFiltrados, TableProducto, FunctionSeleccionar, "Seleccionar");
+        //}
+       
+            CreateDropDown(response[2], DropMarca, "idMarca", "marca");
+            CreateDropDown(response[3], DropTalla, "idTalla", "talla");
+            CreateDropDown(response[4], DropBodega, "idBodega", "descripcion");
+        
+>>>>>>> 8c1e8f14ca1a1e27c1ab623282ba2585d3029c7b
     }
 
 
@@ -182,12 +196,36 @@
                 StockActual: TxtActual.value
             }
 
+<<<<<<< HEAD
             let flag = true;
             for (var prop in ObjInst) {
                 if (ObjInst[prop] == "") {
                     flag = false;
                     alert("la propiedad " + prop + " es requerida");
                     break;
+=======
+                let Url = "../api/ValuesControllerInventario/SaveInventario";
+                let response = await fetch(Url, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': "application/json; charset=utf-8",
+                        'Accept': "*"
+                    },
+                    body: JSON.stringify(ObjInst)
+                });
+                response = await response.json();
+                if (response == true) {
+                    alert("Datos Guardados");
+                    window.location.reload();
+                    TxtCodigo.value = "";
+                    TxtIdInventario = "-1"
+                    TxtProducto.value=""
+                    TxtCodigo.value=""
+                    TxtPrecioCompra.value=""
+                    TxtPrecioVenta.value = ""
+                    TxtActual.value = ""
+                    TxtMedida.value=""
+>>>>>>> 8c1e8f14ca1a1e27c1ab623282ba2585d3029c7b
                 }
             }
 
@@ -294,14 +332,22 @@
 
     <div>
         Medida:
+<<<<<<< HEAD
         <select class="TxtForm minimal" id="DropMedida">
             <option value="0">Seleccionar Medida</option>
         </select>
+=======
+        <input class="TxtForm" type="text" id="TxtMedida" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Stock minimo:
+        <input class="TxtForm" type="number" id="TxtMinimo" placeholder="Propiedad..." value="10" disabled />
+>>>>>>> 8c1e8f14ca1a1e27c1ab623282ba2585d3029c7b
     </div>
 
     <div>
         Stock maximo:
-        <input class="TxtForm" type="number" id="TxtMaximo" placeholder="Propiedad..." />
+        <input class="TxtForm" type="number" id="TxtMaximo" placeholder="Propiedad..." value="200" disabled />
     </div>
     <div>
         Stock actual:

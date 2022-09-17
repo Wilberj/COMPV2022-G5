@@ -9,66 +9,67 @@ namespace CAPA_NEGOCIO
 {
    public class DetalleCompra
     {
-        public string TableName = "DETALLECOMPRA";
-        public int IdDetalleCompra { get; set; }
-        public int IdCompra { get; set; }
-        public int IdProducto { get; set; }
-        public int IdInventario { get; set; }
-        public int IdMedida { get; set; }
-        public decimal Precio { get; set; }
-        public int Cantidad { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal IVA { get; set; }
-        public decimal Descuento { get; set; }
-        public decimal Total { get; set; }
+            public string TableName = "DETALLECOMPRA";
+            public int IdDetalleCompra { get; set; }
+            public int IdCompra { get; set; }
+            public int IdProducto { get; set; }
+            public int IdInventario { get; set; }
+            public int IdMedida { get; set; }
+            public decimal Precio { get; set; }
+            public int Cantidad { get; set; }
+            public decimal Subtotal { get; set; }
+            public decimal IVA { get; set; }
+            public decimal Descuento { get; set; }
+            public decimal Total { get; set; }
 
-        public Object TraerIdCompra(DetalleCompra Inst)
-        {
-            try
+            public Object TraerIdCompra(DetalleCompra Inst)
             {
-                return SqlADOConexion.SQLM.InsertObject(TableName, Inst);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public Object InsertarDetalle(DetalleCompra Inst)
-        {
-            try
-            {
-                SqlADOConexion.IniciarConexion("sa", "1234");
-                if (Inst.IdDetalleCompra == -1)
+                try
                 {
                     return SqlADOConexion.SQLM.InsertObject(TableName, Inst);
                 }
-                else
+                catch (Exception)
                 {
-                    return SqlADOConexion.SQLM.UpdateObject(TableName, Inst, "IdDetalleCompra");
+
+                    throw;
                 }
             }
-            catch (Exception)
+            public Object InsertarDetalle(DetalleCompra Inst)
             {
+                try
+                {
+                    SqlADOConexion.IniciarConexion("sa", "1234");
+                    if (Inst.IdDetalleCompra == -1)
+                    {
+                        return SqlADOConexion.SQLM.InsertObject(TableName, Inst);
+                    }
+                    else
+                    {
+                        return SqlADOConexion.SQLM.UpdateObject(TableName, Inst, "IdDetalleCompra");
+                    }
+                }
+                catch (Exception)
+                {
 
-                throw;
+                    throw;
+                }
             }
+
+            public Object TraerDetalleCompra(DetalleCompra Inst)
+            {
+                try
+                {
+                    SqlADOConexion.IniciarConexion("sa", "1234");
+                    return SqlADOConexion.SQLM.TakeList(TableName, Inst, null);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+
         }
-
-        public Object TraerDetalleCompra(DetalleCompra Inst)
-        {
-            try
-            {
-                SqlADOConexion.IniciarConexion("sa", "1234");
-                return SqlADOConexion.SQLM.TakeList(TableName, Inst, null);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
-
     }
-}
+

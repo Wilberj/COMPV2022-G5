@@ -516,6 +516,7 @@ C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razo
 C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\Reportes\ReporteInventario.cshtml.g.cs
 C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\RolView.cshtml.g.cs
 C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\ViewClientes.cshtml.g.cs
+C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\VistaCompra.cshtml.g.cs
 C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\VistaCompraDetalles.cshtml.g.cs
 C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\Vistas\VistaCompra.cshtml.g.cs
 C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\Vistas\VistaVenta.cshtml.g.cs

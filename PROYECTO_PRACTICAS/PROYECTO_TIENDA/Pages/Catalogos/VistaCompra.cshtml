@@ -1,0 +1,42 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.VistaCompraModel
+@{
+}
+<script type="module">
+    import CreateTable from '../js/TableComponent.js';
+    let compraD
+    //import TableInforme from '../js/Reporte.js'
+
+
+    const CargarDatos = async () => {
+        let UrlCompra = "../api/VistaCompra/VerCompraProc";
+        let response = await fetch(UrlCompra, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        compraD = response
+        CreateTable(response,TableCompra)
+
+    }
+    TxtBusquedaCompra.onkeyup = (ev) => {
+        const parametro = ev.target.value;
+        const CompraFiltrados = compraD.filter(x => x.descripcion.includes(parametro));
+        CreateTable(CompraFiltrados, TableCompra);
+    }
+
+    CargarDatos()
+
+</script>
+<div>
+    <input type="text" class="TxtFormDetalle" id="TxtBusquedaCompra" placeholder="Buscar..." value="" />
+    <table id="TableCompra" class="FrmTable">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>

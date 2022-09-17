@@ -156,6 +156,7 @@ namespace CAPA_DATOS
                 //UPDATE INVENTARIO SET StockMaximo=100 WHERE Producto=2
                 //update INVENTARIO set StockActual = StockActual + 10 where IdProducto = 1
                 string Query = "UPDATE INVENTARIO SET StockActual = StockActual - " + cant + " WHERE IdProducto = " + id;
+
                 return ExcuteSqlQuery(Query);
             }
             catch (Exception)

@@ -1,11 +1,13 @@
 ﻿@page
 @model PROYECTO_TIENDA.Pages.Catalogos.CatManageModel
 @{
+
 }
 <script type="module">
 
     import CreateTable from '../js/TableComponent.js';
     import CreateDropDown from '../js/DropDownComponent.js';
+
     const DetallesCompra = [];
     let compra;
 
@@ -30,10 +32,10 @@
 
         // DROPDOWN
         CreateDropDown(response[1], DropProveedor, "idProveedor", "nombres")
-        CreateDropDown(response[2], DropMedida, "idMedida", "medida")
+        CreateDropDown(response[3], DropMedida, "idMedida", "medida")
 
         //TRAE MODAL  INVENTARIO
-        CreateTable(response[4], TableProducto, FunctionSeleccionar, "Seleccionar");
+        CreateTable(response[5], TableProducto, FunctionSeleccionar, "Seleccionar");
 
 
     }
@@ -486,4 +488,4 @@
     //        encontrarId.Iva = Txtiva;
     //        encontrarId.Total = Txttotal;
     //    }
-    //*@
+    //*@ }
