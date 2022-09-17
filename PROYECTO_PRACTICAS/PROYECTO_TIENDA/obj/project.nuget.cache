@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NZAIBvCJMND8fwFSOiV6L9Wu7t9prH6pgUFOk+P0ZbGoGks2Hgp2rFIzv0w62Mvmpz/zMdxgie5zydOTr7cY9g==",
+  "dgSpecHash": "3H0uaC/RBL0oIPoC26K/HMFXEswyCopSvTgXhnJhP5H3Op+aD7XEQAzFwqUUe6NwNYVubfK5uLFk/4fA7qbEAg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Isabel Aguilar\\Favorites\\Documents\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
+  "projectFilePath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.17\\microsoft.aspnetcore.cryptography.internal.5.0.17.nupkg.sha512",

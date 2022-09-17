@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DmsuoMHQBjU84PeGKCgReJlbijAPtDM4q+Piy1vD/P9gwvj6RsjPg+/qtsMiMzO2295wbfRPl2Ob12/b5enjFg==",
+  "dgSpecHash": "nqlXhiKd4hCGz7/kvZ4hXCasonjaG77U0x42xkqRlE8M8PdotYyOwnIi+T32fecZI9zcdVjLd7XcFy2Gyahc5A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Isabel Aguilar\\Favorites\\Documents\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
+  "projectFilePath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

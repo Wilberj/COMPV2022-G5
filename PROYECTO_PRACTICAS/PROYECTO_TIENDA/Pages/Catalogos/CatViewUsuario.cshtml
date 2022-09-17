@@ -25,7 +25,7 @@
     const FunctionEdit = async (Item) => {
         TxtIdUsuario.value = Item.idUsuario;
         TxtUsuario.value = Item.usuario;
-        TxtContrasena.value = Item.contraseña;
+        TxtContrasena.value = Item.contrasena;
         DropRol.value = Item.idRol;
         DropEstado.value = Item.estado;
     }
@@ -34,7 +34,7 @@
             const ObjInst = {
                 IdUsuario: TxtIdUsuario.value,
                 Usuario: TxtUsuario.value,
-                Contraseña: TxtContrasena.value,
+                Contrasena: TxtContrasena.value,
                 IdRol: DropRol.value,
                 Estado: DropEstado.value
             }

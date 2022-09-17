@@ -48,7 +48,7 @@
             if (response == true) {
                 alert("Datos Guardados");
                 CargarDatos();
-                TxtIdCliente.value = "-1";
+                TxtIdCliente.value = "";
                 TxtNombres.value = "";
                 TxtApellidos.value = "";
                 TxtCelular.value = "";
@@ -62,10 +62,11 @@
 </script>
 
 <div class="FrmContainer">
-    <div hidden="true">
+   <div hidden="true">
         Id Cliente:
         <input class="TxtForm" type="number" id="TxtIdCliente" value="-1" />
     </div>
+
     <div>
         Nombres:
         <input class="TxtForm" type="text" id="TxtNombres" placeholder="Propiedad..." />

@@ -41,13 +41,16 @@ namespace PROYECTO_TIENDA.Controllers
             Response.Add(Tal.GetTalla(Tal));
             Bodega B = new Bodega();
             Response.Add(B.GetBodega(B));
+            TransMedida TM = new TransMedida();
+            Response.Add(TM.TraerTransMedida(TM));
+
             return Response;
         }
 
-        public object TraerInforme(object Inventario)
-        {
-            NInventario InformI = JsonConvert.DeserializeObject<NInventario>(Inventario.ToString()); ;
-            return InformI.TraerInformeInventario(InformI);
-        }
+        //public object TraerInforme(object Inventario)
+        //{
+        //    NInventario InformI = JsonConvert.DeserializeObject<NInventario>(Inventario.ToString()); ;
+        //    return InformI.TraerInformeInventario(InformI);
+        //}
     }
 }

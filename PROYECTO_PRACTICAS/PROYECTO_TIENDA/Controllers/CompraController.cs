@@ -25,11 +25,14 @@ namespace PROYECTO_TIENDA.Controllers
             NProveedor Prov = new NProveedor();
             Response.Add(Prov.TraerProveedor(Prov));
 
-            DetalleCompra dt = new DetalleCompra();
-            Response.Add(dt.TraerDetalleCompra(dt));
+            UMedida UM = new UMedida();
+            Response.Add(UM.GetMedida(UM));
 
             NInventario i = new NInventario();
             Response.Add(i.GetInventario(i));
+
+            MostrarInventario I = new MostrarInventario();
+            Response.Add(I.TraerInvProc(I));
 
             return Response;
         }
@@ -42,5 +45,13 @@ namespace PROYECTO_TIENDA.Controllers
 
             return true;
         }
+
+        //public object VerCompraProc(object ObjInst)
+        //{
+        //    Compra Inst = JsonConvert.DeserializeObject <Compra>(ObjInst.ToString());
+        //    return Inst.TraerCompraConProc(Inst);
+        //}
+
+
     }
 }

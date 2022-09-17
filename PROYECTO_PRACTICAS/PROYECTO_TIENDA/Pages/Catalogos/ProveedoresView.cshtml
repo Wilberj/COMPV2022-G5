@@ -5,7 +5,7 @@
 }
 <script type="module">
     import CreateTable from '../js/TableComponent.js';
-    //import CreateDropDown from '../js/DropDownComponent.js';
+
     const CargarDatos = async () => {
         let UrlPV = "../api/Proveedor/GetProveedor";
         let response = await fetch(UrlPV, {
@@ -20,11 +20,11 @@
         console.log(response);
 
         CreateTable(response, TableData, FunctionEdit);
-        //CreateDropDown(response[1], DropDocumento, "idDocumento", "documento")
+
     }
 
     const FunctionEdit = async (Item) => {
-        TxtIdProveedor.value = Item.idProveedor;
+        IdProveedor.value = Item.idProveedor;
         TxtNombre.value = Item.nombres;
         TxtApellido.value = Item.apellidos;
         TxtCelular.value = Item.celular;
@@ -36,15 +36,15 @@
     window.onload = async () => {
         BtnSave.onclick = async () => {
             const ObjInst = {
-                IdProveedor: TxtIdProveedor.value,
+                IdProveedor: IdProveedor.value,
                 Nombres: TxtNombre.value,
                 Apellidos: TxtApellido.value,
-                Celular: TxtCelular.value,
                 Correo: TxtCorreo.value,
+                Celular: TxtCelular.value,
                 Direccion: TxtDireccion.value,
                 Estado: DropEstado.value
             }
-            let Url = "../api/Proveedor/InsertarProveedores";
+            let Url = "../api/Proveedor/InsertarP";
             let response = await fetch(Url, {
                 method: "POST",
                 headers: {
@@ -57,19 +57,17 @@
             if (response == true) {
                 alert("Datos Guardados");
                 CargarDatos();
+
+                TxtApellido.value = "";
+                TxtNombre.value = "";
+                TxtDireccion.value = "";
+                TxtCelular.value = "";
+                TxtCorreo.value = "";
+                TxtIdProveedor.value = "";
             }
         }
 
-       
         CargarDatos();
-
-        TxtApellido.value = "";
-        TxtNombre.value = "";
-        TxtDireccion.value = "";
-        TxtCelular.value = "";
-        TxtCorreo.value = "";
-        TxtIdProveedor.value = "";
-
 
     }
 </script>
@@ -77,8 +75,8 @@
 <div class="FrmContainer">
 
     <div hidden="true">
-        Id Proveedor:
-        <input class="TxtForm" type="number" id="TxtIdProveedor" value="-1"/>
+        IdProveedor:
+        <input class="TxtForm" type="number" id="IdProveedor" value="-1" />
     </div>
     <div>
         Nombre:
@@ -115,8 +113,6 @@
     </div>
 </div>
 
-
-@* Tabla estatica de ejemplo, tiene que ser dinamica" *@
 <table id="TableData" class="FrmTable">
     <thead>
     </thead>

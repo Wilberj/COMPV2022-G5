@@ -11,11 +11,12 @@ namespace CAPA_NEGOCIO
     {
         public string TableName = "DETALLECOMPRA";
         public int IdDetalleCompra { get; set; }
-        public int Compra { get; set; }
+        public int IdCompra { get; set; }
         public int IdProducto { get; set; }
-        public int Precio { get; set; }
+        public int IdInventario { get; set; }
+        public int IdMedida { get; set; }
+        public decimal Precio { get; set; }
         public int Cantidad { get; set; }
-        public string Medida { get; set; }
         public decimal Subtotal { get; set; }
         public decimal IVA { get; set; }
         public decimal Descuento { get; set; }

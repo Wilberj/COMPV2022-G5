@@ -1,0 +1,47 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.VistaCompra.VistaCompraModel
+@{
+}
+<script type="module">
+    import CreateTable from '../../js/TableComponent.js';
+    let compra;
+
+    const CargarDatos = async () => {
+        let UrlCompra = "../../api/Compra/VerCompra";
+        let response = await fetch(UrlCompra, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        compra = response[0];
+        //CARGAR TODOS LAS LISTAS
+        console.log('Hola en la vista')
+        console.log(response);
+        console.log(compra);
+
+        //CARGA TABLA COMPRA
+        CreateTable(compra, TableCompra);//tabla compra
+
+        window.onload = async () => {
+            CargarDatos();
+            alert("hola")
+
+        }
+
+        //CargarDatos();
+         
+
+    }
+</script>
+<div>
+    <input type="text" class="TxtForm" id="TxtBusquedaCompra" placeholder="Buscar..." value="" />
+    <table id="TableCompra" class="FrmTable">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>

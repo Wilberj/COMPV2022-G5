@@ -6002,11 +6002,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Isabel Aguilar\\Favorites\\Documents\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
+      "projectUniqueName": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
       "projectName": "PROYECTO_TIENDA",
-      "projectPath": "C:\\Users\\Isabel Aguilar\\Favorites\\Documents\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
+      "projectPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
       "packagesPath": "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Isabel Aguilar\\Favorites\\Documents\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\obj\\",
+      "outputPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6027,8 +6027,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Isabel Aguilar\\Favorites\\Documents\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
-              "projectPath": "C:\\Users\\Isabel Aguilar\\Favorites\\Documents\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj"
+            "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
+              "projectPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj"
             }
           }
         }
