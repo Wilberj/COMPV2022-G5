@@ -33,15 +33,17 @@ namespace CAPA_NEGOCIO
                     {
                         DetalleCompra NewId = new DetalleCompra();
                         NewId.IdDetalleCompra = -1; /*(JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).IdDetalleCompra;*/
-                        NewId.Compra = idcompra;
+                        NewId.IdCompra = idcompra;
+                        NewId.IdInventario = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).IdInventario;
                         NewId.IdProducto = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).IdProducto;
                         NewId.Precio = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Precio;
                         NewId.Cantidad = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Cantidad;
-                        NewId.Medida = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Medida;
+                        NewId.IdMedida = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).IdMedida;
                         NewId.Subtotal = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Subtotal;
                         NewId.IVA = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).IVA;
                         NewId.Descuento= (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Descuento;
                         NewId.Total = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Total;
+
                         NewId.TraerIdCompra(NewId);
 
                         NInventario InvenA = new NInventario();//instancia de inventario
@@ -83,8 +85,5 @@ namespace CAPA_NEGOCIO
             }
 
         }
-
-       
-
     }
 }

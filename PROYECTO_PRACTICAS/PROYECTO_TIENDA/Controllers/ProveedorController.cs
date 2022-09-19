@@ -15,13 +15,12 @@ namespace PROYECTO_TIENDA.Controllers
     {
         [HttpPost]
 
-        public object InsertarProveedores(object ObjInst)
+        public object InsertarP(object ObjInst)
         {
             NProveedor Inst = JsonConvert.DeserializeObject<NProveedor>(ObjInst.ToString());
             Inst.Insertar(Inst);
             return true;
         }
-
         [HttpPost]
         public object GetProveedor()
         {
@@ -30,3 +29,4 @@ namespace PROYECTO_TIENDA.Controllers
         }
     }
 }
+

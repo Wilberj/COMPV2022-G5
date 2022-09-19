@@ -1,0 +1,79 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.DañadosViewModel
+@{
+}
+<script type="module">
+
+    import CreateTable from "../js/TableComponent.js";
+    //import CreateDropDown from "../js/DropDownComponent.js";
+
+    let Producto;
+
+    const CargarDatos = async () => {
+        let UrlP = "../api/Dañados/GetInventario";
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+        console.log(response);
+        //CARGA DAÑADOS
+        CreateTable(response[0], TableData, FunctionEdit);
+
+        //CARGA PRODUCTO -MODAL
+        Producto = response[1]
+        CreateTable(Producto, TableDan, FunctionSeleccionar, "Seleccionar");
+    }
+
+</script>
+
+<div class="FrmContainer">
+    <div hidden="true">
+        Id Dañados:
+        <input class="TxtForm" type="number" id="TxtIdDan" value="-1" />
+    </div>
+    <div>
+        IdProducto:
+        <input class="TxtForm" type="number" id="TxtIdProducto" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Inventario:
+        <input class="TxtForm" type="number" id="TxtIdInv" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Fecha:
+        <input class="TxtForm" type="date" id="TxtDateTime" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Descripcion:
+        <input class="TxtForm" type="text" id="TxtDescripcion" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Cantidad:
+        <input class="TxtForm" type="number" id="TxtCantidad" placeholder="Propiedad..." />
+    </div>
+    
+</div>
+<div class="FrmContainer">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
+        @*<input class="BTN BTNOK2" type="button" id="BtnModalProducto" value="Agregar Producto" />*@
+    </div>
+</div>
+<table id="TableData" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+< <table id="TableDan" class="FrmTable">
+     <thead>
+       </thead>
+        <tbody>
+      </tbody>
+  </table>
+
+        

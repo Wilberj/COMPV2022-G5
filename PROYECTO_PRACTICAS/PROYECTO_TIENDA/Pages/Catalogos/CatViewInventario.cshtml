@@ -5,6 +5,7 @@
 <script type="module">
     import CreateTable from "../js/TableComponent.js";
     import CreateDropDown from "../js/DropDownComponent.js";
+
     let Producto;
     const CargarDatos = async () => {
         let UrlP = "../api/ValuesControllerInventario/TakeDataForInventario";
@@ -18,13 +19,19 @@
         response = await response.json();
         console.log(response);
         //CARGA IVENTARIO
-        CreateTable(response[0], TableData, FunctionEdit);
+        CreateTableInventario(response[0], TableData, FunctionEdit, "Editar", FunctionDan, "Dañados");
 
         //CARGA PRODUCTO -MODAL
         Producto = response[1]
         CreateTable(Producto, TableProducto, FunctionSeleccionar, "Seleccionar");
 
 
+<<<<<<< HEAD
+        CreateDropDown(response[2], DropMarca, "idMarca", "marca");
+        CreateDropDown(response[3], DropTalla, "idTalla", "talla");
+        CreateDropDown(response[4], DropBodega, "idBodega", "descripcion");
+        CreateDropDown(response[5], DropMedida, "idTransMedida", "equivalencia");
+=======
         //TEXTO BUSQUEDA
         //TxtBusquedaProducto.onchange = (ev) => {
         //    const parametro = ev.target.value;
@@ -36,60 +43,167 @@
             CreateDropDown(response[3], DropTalla, "idTalla", "talla");
             CreateDropDown(response[4], DropBodega, "idBodega", "descripcion");
         
+>>>>>>> 8c1e8f14ca1a1e27c1ab623282ba2585d3029c7b
     }
 
+
     //AGREDAR PRODUCTO DE MODAL A INPUT
-        const FunctionSeleccionar = async (Item) => {
-            console.log(Item)
-            TxtProducto.value = Item.idProducto;
-            ModalFunction(ModalProducto)
+    const FunctionSeleccionar = async (Item) => {
+        console.log(Item)
+        TxtProducto.value = Item.idProducto;
+        TxtNProd.value = Item.nombreProducto;
+        ModalFunction(ModalProducto)
+    }
+
+
+    //FUNCION EDITAR
+    const FunctionEdit = async (Item) => {
+        TxtIdInventario.value = Item.idInventario;
+        TxtProducto.value = Item.idProducto;
+        TxtCodigo.value = Item.codigoProducto;
+        TxtDateTime.value = Item.fechaRegistro;
+        DropMarca.value = Item.idMarca;
+        DropTalla.value = Item.idTalla;
+        DropBodega.value = Item.idBodega;
+        TxtPrecioCompra.value = Item.precioCompra;
+        TxtPrecioVenta.value = Item.precioVenta;
+        TxtMedida.value = Item.medida;
+        TxtMinimo.value = Item.stockMinimo;
+        TxtMaximo.value = Item.stockMaximo;
+        TxtActual.value = Item.stockActual;
+
+
+    }
+
+    //AGREGA DATOS AL FORM DANADOS
+    const FunctionDan = async (Item) => {
+
+        TxtIdProducto.value = Item.idProducto;
+        TxtIdInv.value = Item.idInventario;
+        TxtCoPro.value = Item.codigoProducto;
+
+    }
+
+    //CREATE TABLE INVENTARIO
+    export default function CreateTableInventario(Dataset = [], Table, TableFunction, BtnValue = "Edit", funcion, BtnDañado = "Añadir") {
+        const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
+        const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
+
+
+        thead.innerHTML = "";
+        tbody.innerHTML = "";
+
+
+
+        Dataset.forEach((item, index) => {
+            const row = document.createElement("tr");//filas
+            for (var prop in item) {
+
+                if (index == 0) {
+
+                    const th = document.createElement("th");//encabezados
+                    th.innerText = prop;
+                    thead.append(th);
+                }
+                const td = document.createElement("td"); //tabledata
+                td.innerText = item[prop];
+                row.append(td);
+            }
+            if (index == 0) {
+                const th = document.createElement("th");
+                const thD = document.createElement("th")
+                th.innerText = "Editar";
+                thD.innerHTML = "Productos Dañados"
+                thead.append(th, thD);
+
+            }
+
+            const tdAction = document.createElement("td");
+            const btn = document.createElement("input");
+            btn.type = "button";
+            btn.className = "BTN BTNOK";
+            btn.value = BtnValue;
+            btn.onclick = () => {
+                //console.log(item);
+                TableFunction(item);
+            }
+
+            const tdprod = document.createElement("td");
+            const btnD = document.createElement("input");
+            btnD.type = "button";
+            btnD.className = "BTN BTNOK";
+            btnD.value = BtnDañado;
+            btnD.onclick = () => {
+                ModalFunction(ModalPD);
+                funcion(item)
+            }
+            tdAction.append(btn);
+            tdprod.append(btnD);
+            row.append(tdAction, tdprod);
+            tbody.append(row);
+
+        });
+
+    }
+
+
+    // GUARDAR DAÑADOS
+    BtnSavePD.onclick = async () => {
+        const obj = {
+            IdDañados: TxtIdDan.value,
+            IdInventario: TxtIdInv.value,
+            IdProducto: TxtIdProducto.value,
+            CodigoProducto: TxtCoPro.value,
+            Fecha: TxtDateT.value,
+            Descripcion: TxtDDescripcion.value,
+            Cantidad: TxtCantidad.value
+
         }
-        const FunctionEdit = async (Item) => {
-            TxtIdInventario.value = Item.idInventario;
-            TxtProducto.value = Item.idProducto;
-            TxtCodigo.value = Item.codigoProducto;
-            TxtDateTime.value = Item.fechaRegistro;
-            DropBodega.vale = Item.idBodega;
-            DropMarca.value = Item.idMarca;
-            DropTalla.value = Item.idTalla;
-            TxtPrecioCompra.value = Item.precioCompra;
-            TxtPrecioVenta.value = Item.precioVenta;
-            TxtMedida.value = Item.medida;
-            TxtMinimo.value = Item.stockMinimo;
-            TxtMaximo.value = Item.stockMaximo;
-            TxtActual.value = Item.stockActual;
+
+        let UrlD = "../api/Dan/SaveDan";
+        let response = await fetch(UrlD, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*"
+            },
+            body: JSON.stringify(obj)
+        });
+        response = await response.json();
+        if (response == true) {
+            alert("Datos Guardados");
+            ModalFunction(ModalPD);
         }
-        window.onload = async () => {
-            BtnSave.onclick = async () => {
-                const ObjInst = {
-                    IdInventario: TxtIdInventario.value,
-                    IdProducto: TxtProducto.value,
-                    CodigoProducto: TxtCodigo.value,
-                    FechaRegistro: TxtDateTime.value,
-                    IdBodega:DropBodega.value,
-                    IdMarca: DropMarca.value,
-                    IdTalla: DropTalla.value,
-                    PrecioCompra: TxtPrecioCompra.value,
-                    PrecioVenta: TxtPrecioCompra.value,
-                    Medida:TxtMedida.value ,
-                    StockMinimo: TxtMinimo.value,
-                    StockMaximo: TxtMaximo.value,
-                    StockActual: TxtActual.value
-                }
+    }
 
-                let flag = true;
-                for (var prop in ObjInst) {
-                    if (ObjInst[prop] == "") {
-                        flag = false;
-                        alert("la propiedad " + prop + " es requerida");
-                        break;
-                    }
-                }
 
-                if (!flag) {
-                    return;
-                }
+    /*GUARDAR INVENTARIO*/
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            const ObjInst = {
+                IdInventario: TxtIdInventario.value,
+                IdProducto: TxtProducto.value,
+                CodigoProducto: TxtCodigo.value,
+                FechaRegistro: TxtDateTime.value,
+                Descripcion: TxtDescripcion.value,
+                IdBodega: DropBodega.value,
+                IdMarca: DropMarca.value,
+                IdTalla: DropTalla.value,
+                IdTransMedida: DropMedida.value,
+                PrecioCompra: TxtPrecioCompra.value,
+                PrecioVenta: TxtPrecioCompra.value,
+                StockMaximo: TxtMaximo.value,
+                StockActual: TxtActual.value
+            }
 
+<<<<<<< HEAD
+            let flag = true;
+            for (var prop in ObjInst) {
+                if (ObjInst[prop] == "") {
+                    flag = false;
+                    alert("la propiedad " + prop + " es requerida");
+                    break;
+=======
                 let Url = "../api/ValuesControllerInventario/SaveInventario";
                 let response = await fetch(Url, {
                     method: "POST",
@@ -111,30 +225,79 @@
                     TxtPrecioVenta.value = ""
                     TxtActual.value = ""
                     TxtMedida.value=""
+>>>>>>> 8c1e8f14ca1a1e27c1ab623282ba2585d3029c7b
                 }
             }
-            CargarDatos();
-            BtnModalProducto.onclick = () => {
-                ModalFunction(ModalProducto);
+
+            if (!flag) {
+                return;
             }
-            BtnCerrarProducto.onclick = () => {
-                ModalFunction(ModalProducto);
+
+            let Url = "../api/ValuesControllerInventario/SaveInventario";
+            let response = await fetch(Url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                window.location.reload();
             }
+            TxtIdInventario.value = ""
+            TxtProducto.value = ""
+            TxtCodigo.value = ""
+            TxtDescripcion.value = ""
+            PrecioCompra.value = ""
+            PrecioVenta.value = ""
+            TxtNProd.value = ""
         }
+
+        CargarDatos();
+
+        BtnModalProducto.onclick = () => {
+            ModalFunction(ModalProducto);
+        }
+        BtnCerrarProducto.onclick = () => {
+            ModalFunction(ModalProducto);
+        }
+
+        BtnCerrarPDA.onclick = () => {
+            ModalFunction(ModalPD);
+        }
+
+
+    }
+
 </script>
-<div></div>
+
+
+@*FORMULARIO PARA INVENTARIO*@
 <div class="FrmContainer">
     <div hidden="true">
         Id Inventario:
         <input class="TxtForm" type="number" id="TxtIdInventario" value="-1" />
     </div>
+    <div hidden="true">
+        IdProducto:
+        <input class="TxtForm" type="number" id="TxtProducto" placeholder="Propiedad..." disabled />
+    </div>
+
     <div>
         Producto:
-        <input class="TxtForm" type="text" id="TxtProducto" placeholder="Propiedad..." disabled/>
+        <input class="TxtForm" type="text" id="TxtNProd" placeholder="Propiedad..." disabled />
     </div>
+
     <div>
         Codigo:
         <input class="TxtForm" type="text" id="TxtCodigo" placeholder="Propiedad..." />
+    </div>
+    <div>
+        Descripcion:
+        <input class="TxtForm" type="text" id="TxtDescripcion" placeholder="Propiedad..." />
     </div>
     <div>
         Bodega:
@@ -166,14 +329,22 @@
         PrecioVenta:
         <input class="TxtForm" type="number" id="TxtPrecioVenta" placeholder="Propiedad..." />
     </div>
+
     <div>
         Medida:
+<<<<<<< HEAD
+        <select class="TxtForm minimal" id="DropMedida">
+            <option value="0">Seleccionar Medida</option>
+        </select>
+=======
         <input class="TxtForm" type="text" id="TxtMedida" placeholder="Propiedad..." />
     </div>
     <div>
         Stock minimo:
         <input class="TxtForm" type="number" id="TxtMinimo" placeholder="Propiedad..." value="10" disabled />
+>>>>>>> 8c1e8f14ca1a1e27c1ab623282ba2585d3029c7b
     </div>
+
     <div>
         Stock maximo:
         <input class="TxtForm" type="number" id="TxtMaximo" placeholder="Propiedad..." value="200" disabled />
@@ -189,6 +360,54 @@
         <input class="BTN BTNOK2" type="button" id="BtnModalProducto" value="Agregar Producto" />
     </div>
 </div>
+
+@*FORMULARIO PARA DAÑADOS*@
+
+<div class="ModalContentPD" id="ModalPD">
+    <div class="FrmContainerPD">
+        <div hidden="true">
+            Id Dañados:
+            <input class="TxtForm" type="number" id="TxtIdDan" value="-1" />
+        </div>
+        <div>
+            Inventario:
+            <input class="TxtForm" type="number" id="TxtIdInv" placeholder="Propiedad..." />
+        </div>
+        <div>
+            Producto:
+            <input class="TxtForm" type="number" id="TxtIdProducto" placeholder="Propiedad..." />
+        </div>
+        <div>
+            Codigo Producto:
+            <input class="TxtForm" type="text" id="TxtCoPro" placeholder="Propiedad..." />
+        </div>
+
+        <div>
+            Fecha:
+            <input class="TxtForm" type="date" id="TxtDateT" placeholder="Propiedad..." />
+        </div>
+        <div>
+            Descripcion:
+            <input class="TxtForm" type="text" id="TxtDDescripcion" placeholder="Propiedad..." />
+        </div>
+        <div>
+            Cantidad:
+            <input class="TxtForm" type="number" id="TxtCantidad" placeholder="Propiedad..." />
+        </div>
+
+    </div>
+
+    <div class="FrmContainer">
+        <div>
+            <input class="BTN BTNOK2" type="button" id="BtnSavePD" value="Guardar" />
+            <input class="BTN BTNOK2" type="button" id="BtnCerrarPDA" value="Cerrar" />
+        </div>
+    </div>
+</div>
+
+
+
+@*TABLAS*@
 <table id="TableData" class="FrmTable">
     <thead>
     </thead>
@@ -214,5 +433,4 @@
         </div>
     </div>
 </div>
-
 

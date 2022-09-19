@@ -6,18 +6,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using CAPA_NEGOCIO;
 
+
 namespace PROYECTO_TIENDA.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class VistaCompraController : ControllerBase
+    public class MostrarInvController : ControllerBase
     {
         [HttpPost]
-        public object VerCompraProc()
+        public object VerInventarioProc()
         {
+            MostrarInventario I = new MostrarInventario();
+            return I.TraerInvProc(I);
 
-            VistaCmpraDetalle Inst = new VistaCmpraDetalle();
-            return Inst.TraerCompraConProc(Inst);
         }
+        //{
+        //    VistaCmpraDetalle Inst = new VistaCmpraDetalle();
+        //    return Inst.TraerCompraConProc(Inst);
+        
+
     }
 }

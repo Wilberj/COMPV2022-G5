@@ -6,20 +6,20 @@ namespace CAPA_NEGOCIO
     public class NInventario
     {
         private string TableName = "INVENTARIO";
-        public string VerCompra = "SP_VER_INVENTARIO";
+        //public string VerCompra = "SP_VER_INVENTARIO";
         public int IdInventario { get; set; }
-        public int  IdProducto { get; set; }
+        public int IdProducto { get; set; }
         public string CodigoProducto { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public string Descripcion { get; set; }
         public int IdBodega { get; set; }
         public int IdMarca { get; set; }
         public int IdTalla { get; set; }
+        public int IdTransMedida { get; set; }
         public decimal PrecioCompra { get; set; }
         public decimal PrecioVenta { get; set; }
-        public string Medida { get; set; }
-        public int StockMinimo { get; set; }
-        public  int StockMaximo { get; set; }
-        public  int StockActual { get; set; }
+        public int StockMaximo { get; set; }
+        public int StockActual { get; set; }
 
         public Object Save(NInventario Inst)
         {
@@ -40,7 +40,7 @@ namespace CAPA_NEGOCIO
                 throw;
             }
         }
-        public object ActStock(int cant, int id )
+        public object ActStock(int cant, int id)
         {
             try
             {
@@ -48,6 +48,23 @@ namespace CAPA_NEGOCIO
 
 
                 return SqlADOConexion.SQLM.ActualizarStock(cant, id);
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public object DisminuirStock(decimal cant, int id)
+        {
+            try
+            {
+                SqlADOConexion.IniciarConexion("sa", "123");
+
+
+                return SqlADOConexion.SQLM.DisminuirStock(cant, id);
 
 
             }
@@ -69,18 +86,18 @@ namespace CAPA_NEGOCIO
             }
         }
 
-        public object TraerInformeInventario(NInventario Intv)
-        {
-            try
-            {
-                SqlADOConexion.IniciarConexion("sa", "1234");
-                return SqlADOConexion.SQLM.TakeListWithProcedure(VerCompra, Intv);
-            }
-            catch (Exception)
-            {
+        //public object TraerInformeInventario(NInventario Intv)
+        //{
+        //    try
+        //    {
+        //        SqlADOConexion.IniciarConexion("sa", "1234");
+        //        return SqlADOConexion.SQLM.TakeListWithProcedure(VerCompra, Intv);
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
     }
 }

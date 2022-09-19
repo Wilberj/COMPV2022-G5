@@ -68,7 +68,7 @@ namespace CAPA_DATOS
                         ColumnNames = ColumnNames + AtributeName.ToString() + ",";
                         Values = Values + AtributeValue.ToString() + ",";
                     }
-                    else
+                    else //yyyy/dd/MM
                     {
                         if ((Int32)AtributeValue != -1)
                         {
@@ -139,7 +139,24 @@ namespace CAPA_DATOS
             try
             {
                 //UPDATE INVENTARIO SET StockMaximo=100 WHERE Producto=2
-                string Query = "UPDATE INVENTARIO SET StockActual = StockActual +" + cant + " WHERE IdProducto = " + id;
+                //update INVENTARIO set StockActual = StockActual + 10 where IdProducto = 1
+                string Query = "UPDATE INVENTARIO SET StockActual = StockActual + " + cant + " WHERE IdProducto = " + id;
+                return ExcuteSqlQuery(Query);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public object DisminuirStock(decimal cant, int id)
+        {
+            try
+            {
+                //UPDATE INVENTARIO SET StockMaximo=100 WHERE Producto=2
+                //update INVENTARIO set StockActual = StockActual + 10 where IdProducto = 1
+                string Query = "UPDATE INVENTARIO SET StockActual = StockActual - " + cant + " WHERE IdProducto = " + id;
+
                 return ExcuteSqlQuery(Query);
             }
             catch (Exception)
@@ -206,6 +223,7 @@ namespace CAPA_DATOS
         //        throw;
         //    }
         //}
+
         public Object TakeListWithProcedure(string ProcedureName, Object Inst)
         {
             try
@@ -234,7 +252,7 @@ namespace CAPA_DATOS
                 throw;
             }
         }
-        private static List<Object> ConvertDataTable(DataTable dt, Object Inst) 
+        private static List<Object> ConvertDataTable(DataTable dt, Object Inst)
         {
             List<Object> data = new List<Object>();
             foreach (DataRow row in dt.Rows)

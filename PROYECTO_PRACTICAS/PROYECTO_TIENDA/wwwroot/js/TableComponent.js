@@ -1,15 +1,20 @@
-﻿export default function CreateTable(Dataset = [], Table, TableFunction, BtnValue ="Edit") {
+﻿export default function CreateTable(Dataset = [], Table, TableFunction, BtnValue = "Edit") {
     const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
     const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
-    //const filter=
+    const filter = document.createElement("div");
+    filter.className = "TxtForm";
     thead.innerHTML = "";
     tbody.innerHTML = "";
+    //const contenedor = document.createElement("div");
+    //contenedor.className = "divcontenedor";
+
+
     Dataset.forEach((item, index) => {
         const row = document.createElement("tr");//filas
         for (var prop in item) {
-            
+
             if (index == 0) {
-               
+
                 const th = document.createElement("th");//encabezados
                 th.innerText = prop;
                 thead.append(th);
@@ -22,7 +27,7 @@
             const th = document.createElement("th");
             th.innerText = "Action";
             thead.append(th);
-            
+
         }
         const tdAction = document.createElement("td");
         const btn = document.createElement("input");
@@ -36,5 +41,7 @@
         tdAction.append(btn);
         row.append(tdAction);
         tbody.append(row);
+        //contenedor.append(filter, Table);
     });
+
 }

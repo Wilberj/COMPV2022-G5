@@ -4,10 +4,11 @@
 
 }
 <script type="module">
+
     import CreateTable from '../js/TableComponent.js';
     import CreateDropDown from '../js/DropDownComponent.js';
+
     const DetallesCompra = [];
-    let Producto;
     let compra;
 
     const CargarDatos = async () => {
@@ -19,6 +20,7 @@
                 'Accept': "*/*"
             }
         });
+
         response = await response.json();
         compra = response[0]
 
@@ -26,26 +28,26 @@
         console.log(response);
 
         //CARGA TABLA COMPRA
-        CreateTable(response[0], TableCompra);//tabla compra
+        CreateTable(compra, TableCompra);
 
-        //TRAE PROVEEDOR
+        // DROPDOWN
         CreateDropDown(response[1], DropProveedor, "idProveedor", "nombres")
+        CreateDropDown(response[3], DropMedida, "idMedida", "medida")
 
-        //TRAE EL INVENTARIO
-        Producto = response[4]; 
-        CreateTable(Producto, TableProducto, FunctionSeleccionar, "Seleccionar");
+        //TRAE MODAL  INVENTARIO
+        CreateTable(response[5], TableProducto, FunctionSeleccionar, "Seleccionar");
 
 
     }
 
     //SELECCION DE ITEM DE INVENTARIO
     const FunctionSeleccionar = async (Item) => {
-
-        TxtIdproducto.value = Item.idProducto;
-        Txtproducto.value = Item.producto;
+        Txtproducto.value = Item.idProducto;
+        TxtNproducto.value = Item.producto;
+        TxtInvent.value = Item.idInventario;
         Txtprecio.value = Item.precioCompra;
         TxtStockMaximo.value = Item.stockMaximo;
-        TxtStockMinimo.value = Item.stockMinimo;
+        //TxtStockMinimo.value = Item.stockMinimo;
         TxtStockActual.value = Item.stockActual;
         ModalFunction(ModalProducto)
     }
@@ -54,8 +56,7 @@
     Txtcantidad.onkeyup = (ev) => {
         const stockTotal = parseInt(TxtStockActual.value) + parseInt(ev.target.value);
         if (stockTotal > TxtStockMaximo.value) {
-            alert('Cantidad Ingresada mayor al StockMaximo, Revisa el Inventario')
-            Txtcantidad.value=""
+            alert('Cantidad Ingresada mayor al Stock, Revisa el Inventario')
             ModalFunction(ModalProducto)
         }
         txtsubtotal.value = Txtprecio.value * ev.target.value;
@@ -63,23 +64,23 @@
         Txttotal.value = parseFloat(txtsubtotal.value) + parseFloat(Txtiva.value);
     }
 
-    //Calculo del descuento
+    //CALCULO DE DESCUENTO
     TxtDescuento.onkeyup = (ev) => {
         Txttotal.value = parseFloat(Txttotal.value) - ev.target.value;
     }
 
-   // TEXTO DE BUSQUEDA
+    ////TEXTO DE BUSQUEDA
     TxtBusquedaCompra.onkeyup = (ev) => {
         const parametro = ev.target.value;
         const CompraFiltrados = compra.filter(x => x.descripcion.includes(parametro));
         CreateTable(CompraFiltrados, TableCompra);
     }
 
-    //TEXTO BUSQUEDA PARA INVENTARIO
+    ////TEXTO DE BUSQUEDA INVENTARIO
     TxtBusquedaProducto.onkeyup = (ev) => {
         const parametro = ev.target.value;
-        const ProductoFiltrados = response[4].filter(x => x.producto.includes(parametro));
-        CreateTable(ProductoFiltrados, TableCompra);
+        const InvenFiltrados = response[5].filter(x => x.producto.includes(parametro));
+        CreateTable(InvenFiltrados, TableProducto);
     }
 
 
@@ -135,6 +136,8 @@
         let producto = document.getElementById('Txtproducto');
         //const encontrarId = DetallesCompra.find(i => i.Producto == Objdetalle.Producto);
 
+        if (TxtDescuento.value == "" || undefined) TxtDescuento.value = 0
+
         if (cantidad.value === '' || producto.value === '') {
             alert('Rellena el todos los campos')
             //event.preventDefault();
@@ -143,10 +146,11 @@
 
             //if (encontrarId == undefined || encontrarId == null) {
             Objdetalle = {
-                IdProducto: TxtIdproducto.value,
-                Precio: Txtprecio.value,
+                IdProducto: Txtproducto.value,
+                IdInventario: TxtInvent.value,
+                IdMedida: DropMedida.value,
                 Cantidad: Txtcantidad.value,
-                Medida: Txtmedida.value,
+                Precio: Txtprecio.value,
                 Subtotal: txtsubtotal.value,
                 IVA: Txtiva.value,
                 Descuento: TxtDescuento.value,
@@ -155,6 +159,7 @@
         }
         DetallesCompra.push(Objdetalle);
         console.log(DetallesCompra);
+
         DetallesCompra.forEach((objeto) => {
             CreateTableDetalle(DetallesCompra, TableCD);
 
@@ -172,12 +177,14 @@
         ModalFunction(ModalDetalle);
 
         Txtproducto.value = ""
+        TxtNproducto.value = ""
         Txtcantidad.value = ""
+        TxtInvent.value = ""
         Txtprecio.value = ""
         Txtiva.value = ""
         txtsubtotal.value = ""
         Txttotal.value = ""
-
+        TxtDescuento.value = ""
     }
 
 
@@ -221,7 +228,6 @@
                 alert("Datos Guardados");
                 CargarDatos();
                 location.reload()
-                //location.href = "~/Catalogos/VistaCompra";
             }
 
             DropProveedor.value = 0;
@@ -273,7 +279,7 @@
 
     <div>
         Total:
-        <input class="TxtForm" type="number" id="TxttotalC" placeholder="Propiedad..." disabled/>
+        <input class="TxtForm" type="number" id="TxttotalC" placeholder="Propiedad..." disabled />
     </div>
 
     <div>
@@ -285,7 +291,6 @@
     </div>
 </div>
 
-
 @*formulario para detalle*@
 
 <div class="ModalContentDetalle" id="ModalDetalle">
@@ -294,16 +299,21 @@
 
         <div hidden="true">
             IdProducto:
-            <input class="TxtForm" type="number" id="TxtIdproducto" placeholder="Producto" disabled />
-        </div> 
+            <input class="TxtForm" type="number" id="Txtproducto" placeholder="Producto" disabled />
+        </div>
 
         <div style="display:flex;">
             <div>
                 Producto:
-                <input class="TxtForm" type="text" id="Txtproducto" placeholder="Producto" disabled />
+                <input class="TxtForm" type="text" id="TxtNproducto" placeholder="Producto" disabled />
             </div>
 
             <input type="button" id="BtnModalProducto" class="BTN BTNOK2" value="Insertar Producto" style="height:40px; margin-top:30px;margin-left:20px" />
+        </div>
+
+        <div hidden="true">
+            IdInventario:
+            <input class="TxtForm" type="number" id="TxtInvent" disabled />
         </div>
 
         <div>
@@ -313,7 +323,9 @@
 
         <div>
             Medida:
-            <input class="TxtForm" type="text" id="Txtmedida" placeholder="Propiedad..." value="DOCENAS" disabled />
+            <select class="TxtForm" id="DropMedida">
+                <option value="0">Seleccionar Medida</option>
+            </select>
         </div>
 
         <div>
@@ -340,10 +352,6 @@
             Total:
             <input class="TxtForm" type="number" id="Txttotal" placeholder="Propiedad..." disabled />
         </div>
-        <div>
-
-            <input class="TxtForm" type="number" id="TxtStockMinimo" placeholder="Propiedad..." disabled hidden="true" />
-        </div>
 
         <div>
 
@@ -354,6 +362,7 @@
 
             <input class="TxtForm" type="number" id="TxtStockActual" placeholder="Propiedad..." disabled hidden="true" />
         </div>
+
 
         <div>
             <button class="BTN BTNOK2" id="btnDetalle">Guardar Detalles</button>
@@ -373,21 +382,15 @@
         <input class="BTN BTNOK2" type="button" id="BtnModalDetalle" value="Insertar Detalle" style="margin-right:120px" />
     </div>
 
-
 </div>
 
+
 @*Creacion de tablas*@
-@*TABLA PARA WUE INSERTA DETALLE*@
-<table id="TableDetalle" class="FrmTable" hidden="true">
-    <thead>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+
 
 @*TABLA PAR VER LA COMPRA*@
 <div>
-    <input type="text" class="TxtForm" id="TxtBusquedaCompra" placeholder="Buscar..." value="" />
+    <input type="text" class="TxtFormDetalle" id="TxtBusquedaCompra" placeholder="Buscar..." value="" />
     <table id="TableCompra" class="FrmTable">
         <thead>
         </thead>
@@ -407,7 +410,7 @@
 @*TABLA PARA EL MODAL*@
 <div class="ModalContent" id="ModalProducto">
     <div class="ContainerForm" style="width:max-content">
-        <input type="text" id="TxtBusquedaProducto" placeholder="Buscar..." value="" />
+        <input type="text" id="TxtBusquedaProducto" class="TxtFormDetalle" placeholder="Buscar..." value="" />
         <table id="TableProducto" class="FrmTable">
             <thead>
             </thead>
@@ -435,12 +438,7 @@
         return false;
     }*@
 
-@*//TEXTO DE BUSQUEDA
-    //TxtBusquedaProducto.onchange = (ev) => {
-    //    const parametro = ev.target.value;
-    //    const ProductosFiltrados = Producto.filter(x => x.nombreProducto.includes(parametro));
-    //    CreateTable(ProductosFiltrados, TableProducto, FunctionSeleccionar, "Seleccionar");
-    //}
+@*
 
     //SALVAR DETALLE COMPRA
 
@@ -476,28 +474,8 @@
 
     //    }
 
-    //    // SUMA TOTAL DETALLES
-    //    function sumaTotales(DetallC) {
-    //        const suma = DetallC.map(D => D.Total).reduce((a, v) => a + v, 0);
-    //        TxttotalC.value = suma;
 
-    //    }
-    //    sumaTotales(DetallesCompra);
-
-
-    //    //MODALDETALLE
-    //    ModalFunction(ModalDetalle);
-
-    //    Txtproducto.value = ""
-    //    Txtcantidad.value = ""
-    //    Txtprecio.value = ""
-    //    Txtiva.value = ""
-    //    txtsubtotal.value = ""
-    //    Txttotal.value = ""
-    //}
-    //  }*@
-
-@*//EDITAR DETALLE
+    @*//EDITAR DETALLE
     //const FuncionEditar = async (Item) => {
     //    //ModalFunction(ModalDetalle);
     //    const encontrarId = DetallesCompra.find(i => i.Producto == Item.Producto);
@@ -510,4 +488,4 @@
     //        encontrarId.Iva = Txtiva;
     //        encontrarId.Total = Txttotal;
     //    }
-    //}*@
+    //*@ }
