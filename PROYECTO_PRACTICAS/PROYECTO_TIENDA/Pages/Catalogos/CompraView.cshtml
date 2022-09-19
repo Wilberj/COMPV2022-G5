@@ -68,7 +68,7 @@
         Txttotal.value = parseFloat(Txttotal.value) - ev.target.value;
     }
 
-    //TEXTO DE BUSQUEDA
+   // TEXTO DE BUSQUEDA
     TxtBusquedaCompra.onkeyup = (ev) => {
         const parametro = ev.target.value;
         const CompraFiltrados = compra.filter(x => x.descripcion.includes(parametro));
@@ -221,7 +221,7 @@
                 alert("Datos Guardados");
                 CargarDatos();
                 location.reload()
-                location.href = "~/Catalogos/VistaCompra";
+                //location.href = "~/Catalogos/VistaCompra";
             }
 
             DropProveedor.value = 0;
@@ -386,7 +386,7 @@
 </table>
 
 @*TABLA PAR VER LA COMPRA*@
-<!--<div>
+<div>
     <input type="text" class="TxtForm" id="TxtBusquedaCompra" placeholder="Buscar..." value="" />
     <table id="TableCompra" class="FrmTable">
         <thead>
@@ -394,7 +394,7 @@
         <tbody>
         </tbody>
     </table>
-</div>-->
+</div>
 
 @*TABLA PARA VER EL DETALLLE*@
 <table id="TableCD" class="FrmTable">
