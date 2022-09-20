@@ -18,7 +18,7 @@ namespace CAPA_NEGOCIO
         public string Bodega { get; set; }
         public string Marca { get; set; }
         public string Talla { get; set; }
-        public string Equivalencia { get; set; }//cambiar a medida
+        public string Medida { get; set; }//cambiar a medida
         public decimal PrecioCompra { get; set; }
         public decimal PrecioVenta { get; set; }
         public int StockMaximo { get; set; }
