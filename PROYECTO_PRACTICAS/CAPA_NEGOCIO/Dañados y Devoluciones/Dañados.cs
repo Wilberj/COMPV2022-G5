@@ -32,7 +32,7 @@ namespace CAPA_NEGOCIO
 
                     NInventario InvenA = new NInventario();//instancia de inventario
                     var InventarioCant = Cantidad;
-                    var IdProd = IdProducto;
+                    var IdProd = IdInventario;
                     InvenA.DisminuirStock(InventarioCant, IdProd);
                 }
                 return true;

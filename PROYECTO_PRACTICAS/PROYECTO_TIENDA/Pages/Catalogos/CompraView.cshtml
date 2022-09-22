@@ -1,7 +1,6 @@
 ﻿@page
 @model PROYECTO_TIENDA.Pages.Catalogos.CatManageModel
 @{
-
 }
 <script type="module">
 
@@ -32,10 +31,10 @@
 
         // DROPDOWN
         CreateDropDown(response[1], DropProveedor, "idProveedor", "nombres")
-        CreateDropDown(response[3], DropMedida, "idMedida", "medida")
+        CreateDropDown(response[2], DropMedida, "idMedida", "medida")
 
         //TRAE MODAL  INVENTARIO
-        CreateTable(response[5], TableProducto, FunctionSeleccionar, "Seleccionar");
+        CreateTable(response[4], TableProducto, FunctionSeleccionar, "Seleccionar");
 
 
     }
@@ -488,4 +487,4 @@
     //        encontrarId.Iva = Txtiva;
     //        encontrarId.Total = Txttotal;
     //    }
-    //*@ }
+    //*@ 
