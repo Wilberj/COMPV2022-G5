@@ -9,11 +9,12 @@ namespace CAPA_NEGOCIO
 {
     public class TransMedida
     {
-        public string TableName = "TRANSMEDIDA";
+        public string TableName = "TRANSFORMARMEDIDA";
         public int IdTransMedida { get; set; }
         public int IdMedida { get; set; }
-        public int IdNAsignacion { get; set; }
+        public string NuevaAsignacion { get; set; }
         public string Equivalencia { get; set; }
+        public string Estado { get; set; }
 
 
         public Object Insertar(TransMedida Inst)

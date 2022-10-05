@@ -149,7 +149,7 @@ namespace CAPA_DATOS
             }
         }
 
-        public object DisminuirStock(decimal cant, int id)
+        public object DisminuirStock(int cant, int id)
         {
             try
             {

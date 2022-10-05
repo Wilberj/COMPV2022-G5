@@ -49,9 +49,7 @@ namespace CAPA_NEGOCIO
                         NInventario InvenA = new NInventario();//instancia de inventario
                         var InventarioCant = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).Cantidad;
                         var IdProducto = (JsonConvert.DeserializeObject<DetalleCompra>(Detalle.ToString())).IdProducto;
-                        // //var ExistenciaActual = Convert.ToInt32(InvenA.StockActual); //igualando a stock actual de inventario
-                        // //var stockActualizado = ExistenciaActual + cantidadD;// operacion para aumentar stock
-                        // //var IdP = NewId.Producto; //id de este producto insertado en detalle
+                    
                         InvenA.ActStock(InventarioCant, IdProducto);
                     }
                     return true;

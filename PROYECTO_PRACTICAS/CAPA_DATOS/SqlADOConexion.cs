@@ -11,7 +11,7 @@ namespace CAPA_DATOS
         {
             try
             {
-                UserSQLConexion = "Data Source=.;Initial Catalog=PRUEBA4;Integrated Security=True";
+                UserSQLConexion = "Data Source=.;Initial Catalog=PRUEBA5;Integrated Security=True";
                 SQLM = new SqlServerGDatos(UserSQLConexion);
                 return true;
             }

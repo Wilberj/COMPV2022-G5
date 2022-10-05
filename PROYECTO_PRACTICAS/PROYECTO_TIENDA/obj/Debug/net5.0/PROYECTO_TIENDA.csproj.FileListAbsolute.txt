@@ -647,3 +647,9 @@ C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\ref\
 C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\PROYECTO_TIENDA.pdb
 C:\Sistema\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\PROYECTO_TIENDA.genruntimeconfig.cache
 >>>>>>> f5a85abdc3241312d311c51f60f38213929a1acb
+C:\Users\USER\Desktop\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\DañadosView.cshtml.g.cs
+C:\Users\USER\Desktop\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\MaestroDetalle\VentaView.cshtml.g.cs
+C:\Users\USER\Desktop\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\ViewClientes.cshtml.g.cs
+C:\Users\USER\Desktop\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\VistaCompraDetalles.cshtml.g.cs
+C:\Users\USER\Desktop\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\Vistas\VistaCompra.cshtml.g.cs
+C:\Users\USER\Desktop\COMPV2022-G5\PROYECTO_PRACTICAS\PROYECTO_TIENDA\obj\Debug\net5.0\Razor\Pages\Catalogos\Vistas\VistaVenta.cshtml.g.cs
