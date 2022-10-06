@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using CAPA_NEGOCIO;
 using Newtonsoft.Json;
 
-namespace PROYECTO_TIENDA.Controllers.Devoluciones
+namespace PROYECTO_TIENDA.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
@@ -19,14 +19,23 @@ namespace PROYECTO_TIENDA.Controllers.Devoluciones
         {
             List<Object> Response = new List<Object>();
 
-            NProducto P = new NProducto();
-            Response.Add(P.GetProducto(P));
+            Ventas V = new Ventas();
+            Response.Add(V.TraerVenta(V));
+
+            DetalleVenta DV = new DetalleVenta();
+            Response.Add(DV.VerDetalles(DV));
 
             NInventario i = new NInventario();
             Response.Add(i.GetInventario(i));
 
-            MostrarInventario I = new MostrarInventario();
-            Response.Add(I.TraerInvProc(I));
+            NUsuarios U = new NUsuarios();
+            Response.Add(U.GetUsuarios(U));
+
+            NClientes C = new NClientes();
+            Response.Add(C. GetClientes(C));
+
+            VistaInventario VI =new  VistaInventario();
+            Response.Add(VI.TraerInventario(VI));
 
             return Response;
         }

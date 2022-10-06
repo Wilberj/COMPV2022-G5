@@ -41,4 +41,8 @@
     <UpToDateCheckInput Remove="Pages\Catalogos\CatViewInventario.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Catalogos\Devoluciones\" />
+  </ItemGroup>
+
 </Project>

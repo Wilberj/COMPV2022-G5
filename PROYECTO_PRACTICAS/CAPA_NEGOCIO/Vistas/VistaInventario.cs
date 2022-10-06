@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CAPA_DATOS;
 
-namespace CAPA_NEGOCIO.Vistas
+namespace CAPA_NEGOCIO
 {
     public class VistaInventario
     {
@@ -17,7 +17,7 @@ namespace CAPA_NEGOCIO.Vistas
         public decimal PrecioCompra { get; set; }
         public decimal PrecioVenta { get; set; }
         public int StockActual { get; set; }
-        public Object TraerInventario(MostrarInventario Inst)
+        public Object TraerInventario(VistaInventario Inst)
         {
             try
             {

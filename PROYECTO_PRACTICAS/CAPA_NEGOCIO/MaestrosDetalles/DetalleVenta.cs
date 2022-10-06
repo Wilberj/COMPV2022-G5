@@ -34,5 +34,17 @@ namespace CAPA_NEGOCIO
                 throw;
             }
         }
+        public Object VerDetalles(DetalleVenta Inst)
+        {
+            try
+            {
+                SqlADOConexion.IniciarConexion("sa", "1234");
+                return SqlADOConexion.SQLM.TakeList(TableName, Inst, null);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
