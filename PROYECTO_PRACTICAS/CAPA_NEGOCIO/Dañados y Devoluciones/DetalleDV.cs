@@ -11,9 +11,13 @@ namespace CAPA_NEGOCIO
     {
         private string TableName = "DETALLE_DEVOLUCIONVENTA";
         public int  IdDetalleDV{get;set;}
-       public int  IdDevolucionVenta {get;set;}
-       public int  IdProducto {get;set;}
-       public int Total { get;set; }
+        public int  IdDevolucionVenta {get;set;}
+        public int IdInventario { get; set; }
+        public int IdProducto { get; set; }
+        public int Cantidad { get; set; }
+        public int Total { get; set; }
+        public string Estado{ get; set; }
+
 
         public Object TraerIdDV(DetalleDV Inst)
         {

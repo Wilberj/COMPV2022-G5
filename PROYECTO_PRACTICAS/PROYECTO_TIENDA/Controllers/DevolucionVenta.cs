@@ -37,6 +37,9 @@ namespace PROYECTO_TIENDA.Controllers
             VistaInventario VI =new  VistaInventario();
             Response.Add(VI.TraerInventario(VI));
 
+            UMedida UM = new UMedida();
+            Response.Add(UM.GetMedida(UM));
+
             return Response;
         }
 
