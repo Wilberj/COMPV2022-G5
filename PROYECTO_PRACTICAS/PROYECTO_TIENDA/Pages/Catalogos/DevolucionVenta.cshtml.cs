@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PROYECTO_TIENDA.Pages.Catalogos
+namespace PROYECTO_TIENDA.Pages.Catalogos.Devoluciones
 {
-    public class VistaCompraModel : PageModel
+    public class DevolucionVentaModel : PageModel
     {
         public void OnGet()
         {

@@ -39,7 +39,7 @@ namespace CAPA_NEGOCIO
                         NewId.IdProducto = (JsonConvert.DeserializeObject<DetalleVenta>(Detalle.ToString())).IdProducto;
                         NewId.IdInventario = (JsonConvert.DeserializeObject<DetalleVenta>(Detalle.ToString())).IdInventario;
                         NewId.Cantidad = (JsonConvert.DeserializeObject<DetalleVenta>(Detalle.ToString())).Cantidad;
-                       NewId.IdMedida = (JsonConvert.DeserializeObject<DetalleVenta>(Detalle.ToString())).IdMedida;
+                        NewId.IdMedida = (JsonConvert.DeserializeObject<DetalleVenta>(Detalle.ToString())).IdMedida;
                         NewId.Precio = (JsonConvert.DeserializeObject<DetalleVenta>(Detalle.ToString())).Precio;
                         NewId.Subtotal = (JsonConvert.DeserializeObject<DetalleVenta>(Detalle.ToString())).Subtotal;
                         NewId.IVA = (JsonConvert.DeserializeObject<DetalleVenta>(Detalle.ToString())).IVA;
@@ -84,6 +84,23 @@ namespace CAPA_NEGOCIO
                 throw;
             }
 
+        }
+
+        public object ANULAR(int id)
+        {
+            try
+            {
+                SqlADOConexion.IniciarConexion("sa", "123");
+
+
+                return SqlADOConexion.SQLM.AnularVenta(id);
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }

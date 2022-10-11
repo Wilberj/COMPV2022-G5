@@ -38,6 +38,27 @@
     border-radius: 0.5cm;
 }
 
+.BtnGuardarV {
+    outline: none;
+    padding: 10px;
+    margin-left: 1rem;
+    text-decoration: none;
+    color: #e5edf0;
+    cursor: pointer;
+    border: none;
+    font-weight: 100;
+    background-color: #109abd;
+}
+
+.FrmContainerDetalleV {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 25px;
+    margin: 30px auto;
+    padding: 20px;
+    box-shadow: 0 1px rgba(0,0,0,0.3);
+    width: 60%;
+}
 
 .TxtForm {
     width: calc(100% - 20px);
@@ -84,7 +105,28 @@ select:-moz-focusring {
     box-shadow: 2px 2px 2px 2.9px rgba(0,0,0,0.3);
     border-collapse: collapse;
 }
+.TablaMaestros {
+    width: 100%;
+    border-collapse: collapse;
+}
 
+    .TablaMaestros thead tr{
+        color: white;
+        background-color: #0f667c;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px;
+        text-align: left;
+        vertical-align: middle;
+        text-transform: capitalize;
+        margin: 0px;
+        border: 1px solid #ddd;
+    }
+
+    .TablaMaestros thead td {
+        padding: 18px;
+        border: 1px solid #ddd;
+    }
     .FrmTable th {
         color: white;
         background-color: #04AA6D;
@@ -129,3 +171,6 @@ select:-moz-focusring {
         outline: none;
         box-shadow: 1.6px 1.6px 1.6px 2.3px rgba(0,0,0,0.3);
     }
+
+
+

@@ -7,28 +7,22 @@ using CAPA_DATOS;
 
 namespace CAPA_NEGOCIO
 {
-    public class MostrarInventario
+    public class VistaInventario
     {
         public int IdInventario { get; set; }
         public int IdProducto { get; set; }
-        public string Producto { get; set; }
-        public string CodigoProducto { get; set; }
-        public DateTime FechaRegistro { get; set; }
-        public string Descripcion { get; set; }
-        public string Bodega { get; set; }
+        public string NombreProducto { get; set; }
         public string Marca { get; set; }
         public string Talla { get; set; }
-        public string Medida { get; set; }//cambiar a medida
         public decimal PrecioCompra { get; set; }
         public decimal PrecioVenta { get; set; }
-        public int StockMaximo { get; set; }
         public int StockActual { get; set; }
-        public Object TraerInvProc(MostrarInventario Inst)
+        public Object TraerInventario(VistaInventario Inst)
         {
             try
             {
                 SqlADOConexion.IniciarConexion("sa", "1234");
-                var vista = SqlADOConexion.SQLM.TakeListWithProcedure("SP_MOSTRARINVENTARIO", Inst);
+                var vista = SqlADOConexion.SQLM.TakeListWithProcedure("SP_MOSTRAR_INV_MAESTROS", Inst);
                 return vista;
             }
             catch (Exception)
@@ -40,5 +34,3 @@ namespace CAPA_NEGOCIO
         }
     }
 }
-
-

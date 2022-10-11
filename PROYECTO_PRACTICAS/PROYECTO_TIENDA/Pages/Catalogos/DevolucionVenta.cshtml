@@ -1,0 +1,787 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.Devoluciones.DevolucionVentaModel
+@{
+}
+
+<script type="module">
+
+    import CreateTable from '../js/TableComponent.js';
+    import CreateDropDown from '../js/DropDownComponent.js';
+    const DetallesVenta = [];//para guardar
+    const DetallesDevolucion = [];//para guardar
+
+
+    let detallesDev
+    let detalles; //guarda el filtrado
+
+    let venta;
+    let devoluciones;
+
+    let Detalleventa; //aqui guardo response
+    let arrayObtenido;
+
+    const CargarDatos = async () => {
+        let UrlDevolucionV = "../api/DevolucionVenta/VerDevolucion";
+        let response = await fetch(UrlDevolucionV, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            }
+        });
+        response = await response.json();
+
+        //CARGAR TODOS LAS LISTAS
+        console.log(response);
+
+        venta = response[0];
+        Detalleventa = response[1];
+
+        //CARGA TABLA Venta y Detalle
+        CreateTableDevolver(venta, TablaVenta, verDetalles, "Devolver");
+        /*CreateTable(Detalleventa, TableDetalleVenta)*/
+
+
+        //MODAL INVENTARIO
+        CreateTable(response[5], TableProducto, FunctionSeleccionar,"Seleccionar");
+
+        //DROPDOWN
+        CreateDropDown(response[3], DropUsuarioD, "idUsuario", "usuario")
+        CreateDropDown(response[4], DropClienteD, "idCliente", "nombres")
+        CreateDropDown(response[6], DropMedidaV, "idMedida", "medida")
+
+
+    }
+    //SELECCION DE ITEM DE INVENTARIO
+    const FunctionSeleccionar = async (Item) => {
+        TxtproductoV.value = Item.idProducto;
+        /*TxtNproducto.value = Item.producto;*/
+        TxtInventV.value = Item.idInventario;
+        TxtprecioV.value = Item.precioCompra;
+        ModalFunction(ModalProducto)
+    }
+
+    //CALCULO DE PORCENTAJES
+    TxtcantidadV.onkeyup = (ev) => {
+        //const stockTotal = parseInt(TxtStockActual.value) + parseInt(ev.target.value);
+        //if (stockTotal > TxtStockMaximo.value) {
+        //    alert('Cantidad Ingresada mayor al Stock, Revisa el Inventario')
+        //    ModalFunction(ModalProducto)
+        //}
+        txtsubtotalV.value = TxtprecioV.value * ev.target.value;
+        TxtivaV.value = txtsubtotalV.value * 0.15;
+        TxttotalV.value = parseFloat(txtsubtotalV.value) + parseFloat(TxtivaV.value);
+    }
+
+    //CALCULO DE DESCUENTO
+    TxtDescuentoV.onkeyup = (ev) => {
+        TxttotalV.value = parseFloat(TxttotalV.value) - ev.target.value;
+    }
+    const anularDetalles = async (obj = {}) => {
+        console.log(obj)
+        DropEstadoD.value = "Anulado";
+        console.log(DropEstadoD.value)
+
+
+    }
+
+
+    const verDetalles = async (obj = {}) => {
+
+        DropClienteD.value = obj.cliente;
+        DropUsuarioD.value = obj.idUsuario;
+        TxtVentaD.value = obj.idVenta;
+        DropClienteV.value = obj.cliente;
+        DropUsuarioV.value = obj.idUsuario;
+        TxttotalV.value = obj.total;
+
+
+        /*PARA EL DETALLEVENTA*/
+        detalles = Detalleventa.filter(x => x.idVenta == obj.idVenta)
+      
+        /*PARA LOS DETALLES DEVOLUCION*/
+        detallesDev = Detalleventa.filter(x => x.idVenta == obj.idVenta)
+
+        arrayObtenido = detallesDev.map(function (elem) {
+            let returnObjeto = { IdProducto: elem.idProducto, IdInventario: elem.idInventario, Cantidad: elem.cantidad, Estado: DropEstadoD.value = "Vendido" };
+            return returnObjeto;
+        });
+
+        DetallesDevolucion.push(arrayObtenido)
+
+        
+        CreateTableDV(arrayObtenido, TableDevolucion, anularDetalles, "Anular")
+        /*CreateTableDV(arrayObtenido, TableDevolucion, anularDetalles, "Anular")*/
+        console.log("arrayObtenido")
+        console.log(DetallesDevolucion)
+        console.log(arrayObtenido)
+
+    }
+
+    function CreateTableDV(Dataset = [], Table, TableFunction, BtnValue = "Anular") {
+        const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
+        const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
+        thead.innerHTML = "";
+        tbody.innerHTML = "";
+
+
+        Dataset.forEach((item, index) => {
+            const row = document.createElement("tr");//filas
+            for (var prop in item) {
+
+                if (index == 0) {
+
+                    const th = document.createElement("th");//encabezados
+                    th.innerText = prop;
+                    thead.append(th);
+                }
+                const td = document.createElement("td"); //tabledata
+                td.innerText = item[prop];
+                row.append(td);
+            }
+            if (index == 0) {
+
+                const boton = document.createElement("th");
+                boton.innerText = "Anular";
+                thead.append(boton);
+
+            }
+            const tdAction = document.createElement("td");
+            const btn = document.createElement("input");
+
+            btn.type = "button";
+            btn.className = "BTN BTNOK";
+            btn.value = BtnValue;
+            btn.onclick = (obje = {}) => {
+                const Eliminar = detalles.indexOf(obje);
+                detalles.splice(Eliminar, 1);
+                DetallesVenta.push(detalles);
+                console.log("DetallesVenta")
+                console.log(DetallesVenta);
+
+                CreateTable(detalles, TableDetalleVenta)
+                ModalFunction(ModalVentaDetalles);
+                //arrayObtenido.Estado = DropEstadoD.value = "Anulado";
+                //TableFunction(item);
+
+                //const Eliminar = detalles.indexOf(obje);
+                //detalles.splice(Eliminar, 1);
+                //console.log(detalles);
+                ///*DetallesVenta.push(detalles)*/
+                //console.log(DetallesVenta);
+                //console.log(arrayObtenido);
+                //DetallesDevolucion.push(arrayObtenido)
+                //CreateTable(detalles, TableDetalleVenta)
+                //ModalFunction(ModalVentaDetalles);
+            }
+
+            tdAction.append(btn);
+            row.append(tdAction);
+            tbody.append(row);
+
+        });
+
+    }
+    function CreateTableDevolver(Dataset = [], Table, TableFunction, BtnValue = "Restaurar") {
+        const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
+        const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
+        thead.innerHTML = "";
+        tbody.innerHTML = "";
+
+
+        Dataset.forEach((item, index) => {
+            const row = document.createElement("tr");//filas
+            for (var prop in item) {
+
+                if (index == 0) {
+
+                    const th = document.createElement("th");//encabezados
+                    th.innerText = prop;
+                    thead.append(th);
+                }
+                const td = document.createElement("td"); //tabledata
+                td.innerText = item[prop];
+                row.append(td);
+            }
+            if (index == 0) {
+                const th = document.createElement("th");
+                th.innerText = "Devolucion";
+                thead.append(th);
+
+            }
+            const tdAction = document.createElement("td");
+            const btn = document.createElement("input");
+            btn.type = "button";
+            btn.className = "BTN BTNOK";
+            btn.value = BtnValue;
+            btn.onclick = () => {
+                ModalFunction(ModalVenta);
+                TableFunction(item);
+            }
+            tdAction.append(btn);
+            row.append(tdAction);
+            tbody.append(row);
+
+        });
+
+    }
+
+
+    btnDetalleV.onclick = (Objdetalle = {}) => {
+
+        let cantidad = document.getElementById('TxtcantidadV');
+        let producto = document.getElementById('TxtproductoV');
+
+
+        //if (TxtDescuento.value == "" || undefined) TxtDescuento.value = 0
+
+        if (cantidad.value === '' || producto.value === '') {
+            alert('Rellena el todos los campos')
+
+
+        } else {
+
+            Objdetalle = {
+                IdInventario: TxtInventV.value,
+                IdProducto: TxtproductoV.value,
+                Precio: TxtprecioV.value,
+                Cantidad: TxtcantidadV.value,
+                IdMedida: DropMedidaV.value,
+                Subtotal: txtsubtotalV.value,
+                IVA: TxtivaV.value,
+                Descuento: TxtDescuentoV.value,
+                Total: TxttotalV.value
+            }
+        }
+        detalles.push(Objdetalle);
+        console.log(detalles);
+        CreateTable(detalles, TableDetalleVenta)
+
+        //DetallesVenta.forEach((objeto) => {
+        //    CreateTableDetalle(DetallesVenta, TableVD);
+
+        //})
+        // SUMA TOTAL DETALLES
+        function sumaTotales(DetallV) {
+            const suma = DetallV.map(D => D.Total).reduce((a, v) => parseInt(a) + parseInt(v), 1);
+            TxttotalV.value = suma;
+
+        }
+        sumaTotales(DetallesVenta);
+    }
+    
+    BtnSaveV.onclick = async () => {
+            let UrlVenta = "../api/Venta/GuardarVenta";
+            const ObjInst = {
+                IdVenta: TxtVentaV.value,
+                Fecha: TxtfechaV.value,
+                Descripcion: TxtdescripcionV.value,
+                Cliente: DropClienteV.value,
+                IdUsuario: DropUsuarioV.value,
+                Total: TxttotalV.value,
+                Estado: DropEstadoV.value,
+                DetallesV: DetallesVenta
+
+            }
+            let flag = true;
+            for (var prop in ObjInst) {
+                if (ObjInst[prop] == "") {
+                    flag = false;
+                    alert("la propiedad " + prop + " es requerida");
+                    break;
+                }
+            }
+
+            if (!flag) {
+                return;
+            }
+
+            let response = await fetch(UrlVenta, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                location.reload()
+            }
+
+    }
+    CargarDatos()
+    
+
+    window.onload = async () => {
+
+        BtnSaveD.onclick = async () => {
+            let UrlDevolucion = "../api/DevolucionVenta/GuardarDevolucion";//--
+            const ObjInst = {
+                IdDevolucion: Txtdevolucion.value,
+                IdCliente: DropClienteD.value,
+                IdVenta: TxtVentaD.value,
+                IdUsuario: DropUsuarioD.value,
+                Fecha: TxtfechaD.value,
+                Observaciones: TxtdescripcionD.value,
+                Total: TxttotalD.value,
+                DetallesV: DetallesDevolucion
+
+            }
+            let flag = true;
+            for (var prop in ObjInst) {
+                if (ObjInst[prop] == "") {
+                    flag = false;
+                    alert("la propiedad " + prop + " es requerida");
+                    break;
+                }
+            }
+
+            if (!flag) {
+                return;
+            }
+
+            let response = await fetch(UrlDevolucion, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                location.reload()
+                ModalFunction(ModalVentaDetalles);
+            }
+
+        }
+        CargarDatos();
+
+
+    }
+    CargarDatos();
+
+    BtnModalProductoV.onclick = () => {
+        ModalFunction(ModalProducto);
+    }
+    BtnCerrarProducto.onclick = () => {
+        ModalFunction(ModalProducto);
+    }
+    BtnAbrirVenta.onclick = () => {
+        ModalFunction(ModalVenta);
+    }
+
+    BtnCerrarVenta.onclick = () => {
+        ModalFunction(ModalVenta);
+    }
+    btnCerrarMV.onclick = () => {
+        ModalFunction(ModalVentaDetalles);
+    }
+
+</script>
+
+
+<h2 style="margin-left:40rem">DEVOLUCIONES DE VENTA</h2>
+
+@*FORMULARIO DEVOLUCION*@
+<div class="FrmContainerDetalleV">
+
+    <div hidden="true">
+        IddDevolucion:
+        <input class="TxtForm" type="number" id="Txtdevolucion" placeholder="Propiedad..." value="-1" />
+    </div>
+    <div hidden="true">
+        IdVenta:
+        <input class="TxtForm" type="number" id="TxtVentaD" placeholder="Propiedad..." value="-1" />
+    </div>
+    <div>
+        Fecha:
+        <input class="TxtForm" type="date" id="TxtfechaD" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Descripcion:
+        <input class="TxtForm" type="text" id="TxtdescripcionD" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Cliente:
+        <select class="TxtForm" id="DropClienteD">
+            <option value="0">Seleccionar Cliente</option>
+        </select>
+    </div>
+
+    <div>
+        Usuario:
+        <select class="TxtForm" id="DropUsuarioD">
+            <option value="0">Seleccionar Usuario</option>
+        </select>
+    </div>
+
+    <div>
+        Total:
+        <input class="TxtForm" type="text" id="TxttotalD" placeholder="Propiedad..." />
+    </div>
+    <div>
+        <input class="BtnGuardarV" type="button" id="BtnSaveD" value="Guardar" />
+        <input class="BtnGuardarV" type="button" id="BtnAbrirVenta" value="SeleccionarVenta" />
+    </div>
+</div>
+
+
+@*FORMULARIA DETALLEDEVOLUCION*@
+<div hidden="true">
+    @*class="FrmContainerDetalleV"*@
+
+    <div hidden="true">
+        IdDetalleDV:
+        <input class="TxtForm" type="number" id="TxtIdDetalleDV" placeholder="Producto" disabled />
+    </div>
+
+    <div hidden="true">
+        IdDevolucion:
+        <input class="TxtForm" type="number" id="TxtIdDevolucion" disabled />
+    </div>
+
+    <div style="display:flex;">
+        <div>
+            Producto:
+            <input class="TxtForm" type="text" id="TxtIdProdD" placeholder="Producto" disabled />
+        </div>
+
+        <input type="button" id="BtnModalProducto" class="BtnGuardarDEVV" value="+" style="height:40px; margin-top:30px;margin-left:20px" />
+    </div>
+
+    <div>
+        IdInventario:
+        <input class="TxtForm" type="number" id="TxtInventD" disabled />
+    </div>
+
+    <div>
+        Cantidad:
+        <input class="TxtForm" type="number" id="TxtcantidadD" />
+    </div>
+
+    <div hidden="true">
+        Total:
+        <input class="TxtForm" type="number" id="TxttotalD" placeholder="Propiedad..." disabled />
+    </div>
+    <div>
+        Estado:
+        <select class="TxtForm" id="DropEstadoD">
+            <option value="Activo">Activo</option>
+            <option value="Anulado">Anulado</option>
+        </select>
+    </div>
+
+    <div>
+        <button class="BtnGuardarV" id="btnDetalleD" style="margin-top:32px">Guardar Detalles</button>
+    </div>
+
+</div>
+
+
+@**************************@
+@*FORMULARIO DE VENTA*@
+
+<div class="ModalContent" id="ModalVentaDetalles">
+    <div class="ContainerForm">
+        <div style="display:flex; align-content:flex-end; align-items:flex-end; justify-content:flex-end ">
+            <input type="button" id="btnCerrarMV" value="X" style="background-color: white; color: black" />
+        </div>
+
+        <h3 style="margin-left:30rem">Nueva Venta</h3>
+
+        <div class="FrmContainerDetalleV">
+
+
+
+            <div hidden="true">
+                IdVenta:
+                <input class="TxtForm" type="number" id="TxtVentaV" placeholder="Propiedad..." value="-1" />
+            </div>
+            <div>
+                Fecha:
+                <input class="TxtForm" type="date" id="TxtfechaV" placeholder="Propiedad..." />
+            </div>
+
+            <div>
+                Descripcion:
+                <input class="TxtForm" type="text" id="TxtdescripcionV" placeholder="Propiedad..." />
+            </div>
+
+            <div>
+                Cliente:
+                <select class="TxtForm" id="DropClienteV">
+                    <option value="0">Seleccionar Cliente</option>
+                </select>
+            </div>
+
+            <div>
+                Usuario:
+                <select class="TxtForm" id="DropUsuarioV">
+                    <option value="0">Seleccionar Usuario</option>
+                </select>
+            </div>
+
+            <div>
+                Total:
+                <input class="TxtForm" type="text" id="TxttotalV" placeholder="Propiedad..." />
+            </div>
+
+            <div>
+                Estado:
+                <select class="TxtForm" id="DropEstadoV">
+                    <option value="Activo">Activo</option>
+                    <option value="Anulado">Anulado</option>
+                </select>
+            </div>
+            <div>
+                <input class="BtnGuardarV" type="button" id="BtnSaveV" value="Guardar" />
+            </div>
+        </div>
+
+        <h3 style="margin-left:30rem">Detalles</h3>
+        <div class="FrmContainerDetalleV">
+
+            <div style="display:flex;">
+                <div>
+                    IdProducto:
+                    <input class="TxtForm" type="number" id="TxtproductoV" placeholder="Producto" disabled />
+                </div>
+
+                <input type="button" id="BtnModalProductoV" class="BtnGuardarV" value="+" style="height:40px; margin-top:30px;margin-left:20px" />
+            </div>
+
+            <div hidden="true">
+                IdInventario:
+                <input class="TxtForm" type="number" id="TxtInventV" disabled />
+            </div>
+
+            <div>
+                Cantidad:
+                <input class="TxtForm" type="number" id="TxtcantidadV" />
+            </div>
+
+            <div>
+                Medida:
+                <select class="TxtForm" id="DropMedidaV">
+                    <option value="0">Seleccionar Medida</option>
+                </select>
+            </div>
+
+            <div>
+                Precio:
+                <input class="TxtForm" type="number" id="TxtprecioV" placeholder="Propiedad..." disabled />
+            </div>
+
+            <div hidden="true">
+                Subtotal:
+                <input class="TxtForm" type="number" id="txtsubtotalV" placeholder="Propiedad..." disabled />
+            </div>
+
+            <div hidden="true">
+                IVA:
+                <input class="TxtForm" type="number" id="TxtivaV" placeholder="Propiedad..." disabled />
+            </div>
+
+            <div>
+                Descuento:
+                <input class="TxtForm" type="number" id="TxtDescuentoV" placeholder="Propiedad..." />
+            </div>
+
+            <div hidden="true">
+                Total:
+                <input class="TxtForm" type="number" id="TxttotalV" placeholder="Propiedad..." />
+            </div>
+            <div>
+                <button class="BtnGuardarV" id="btnDetalleV" style="margin-top:32px">Guardar Detalles</button>
+            </div>
+
+        </div>
+
+        <table id="TableDetalleVenta" class="FrmTable">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@*CREACION DE TABLAS*@
+@*TABLA PARA VENTAS Y DETALLE*@
+<!--<div class="FrmContainerDetalleV">
+    <table class="TablaMaestrosV" id="maestros">
+        <thead>
+            <tr>
+                <td>IdDetalleVenta</td>
+                <td>IdVenta</td>
+                <td>IdProducto</td>
+                <td>IdInventario</td>-->
+@*<td>Articulo</td>*@
+<!--<td>Cantidad</td>
+                <td>Medida</td>
+                <td>Precio</td>
+                <td>Subtotal</td>
+                <td>IVA</td>
+                <td>Descuento</td>
+                <td>Total</td>
+
+                <td>Eliminar</td>
+            </tr>
+        </thead>
+        <tbody id="bodyV">
+        </tbody>
+
+    </table>
+</div>-->
+@*TABLA PARA DEVOLUCIONES*@
+<!--<div class="FrmContainerDetalleV">
+    <table class="TablaMaestrosV">
+        <thead>
+            <tr>
+                <td>IdDetalleVenta</td>
+                <td>IdVenta</td>
+                <td>IdProducto</td>
+                <td>IdInventario</td>
+                <td>Cantidad</td>-->
+@*<td>Articulo</td>*@
+<!--<td>Total</td>
+                <td>Estado</td>
+                <td>Eliminar</td>
+            </tr>
+        </thead>
+        <tbody id="body">
+        </tbody>
+
+    </table>
+</div>-->
+@*TABLA PARA VER EL DETALLLE*@
+<table id="TableDevolucion" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+
+
+@*TABLA PARA VER EL DETALLLE*@
+<div class="ModalContent" id="ModalVenta">
+    <div class="ContainerForm">
+        <table id="TablaVenta" class="FrmTable">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+    <input class="BTN BTNOK2" type="button" id="BtnCerrarVenta" value="Cerrar" />
+</div>
+
+@*TABLA PARA EL MODAL*@
+<div class="ModalContent" id="ModalProducto">
+    <div class="ContainerForm" style="width:max-content">
+        <input type="text" id="TxtBusquedaProducto" class="TxtFormDetalle" placeholder="Buscar..." value="" />
+        <table id="TableProducto" class="FrmTable">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <div class="FrmContainer">
+            <div>
+                <input class="BTN BTNOK2" type="button" id="BtnCerrarProducto" value="Cerrar" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@*//detallesDev.forEach((detall) => {
+    //    let filaD = document.createElement("tr");
+    //    filaD.innerHTML =
+    //                     <td>${detall.idDetalleVenta}</td>
+    //                     <td>${detall.idVenta}</td>
+    //                     <td>${detall.idProducto}</td>
+    //                     <td>${detall.idInventario}</td>
+    //                     <td>${detall.cantidad}</td>
+    //                     <td>${detall.total}</td>
+
+    //
+    //    /* < td > ${ DropEstadoD.value }</td >*/
+
+    //    let anular = document.createElement("td");
+    //    let btnAnular = document.createElement("button")
+
+    //    btnAnular.classList.add("BTNAnular");
+    //    btnAnular.innerText = "Anular";
+
+    //    anular.appendChild(btnAnular);
+    //    filaD.appendChild(anular);
+    //    body.appendChild(filaD);
+
+    //    btnAnular.onclick = (objeto) => {
+    //        DropEstadoD.value = "Anulado";
+    //        console.log(DropEstadoD.value)
+    //        btnAnular.innerText = "Anulado";
+    //        console.log(objeto)
+
+    //        //const Eliminar = detalles.indexOf(objeto);
+    //        //detalles.splice(Eliminar, 1);
+
+    //    }
+    //})
+
+    ///*PARA LOS DETALLES DE VENTA*/
+    //detalles.forEach((detalles) => {
+    //    let fila = document.createElement("tr");
+    //    fila.innerHTML = `
+    //                     <td>${detalles.idDetalleVenta}</td>
+    //                     <td>${detalles.idVenta}</td>
+    //                     <td>${detalles.idProducto}</td>
+    //                     <td>${detalles.idInventario}</td>
+    //                     <td>${detalles.cantidad}</td>
+    //                     <td>${detalles.idMedida}</td>
+    //                     <td>${detalles.precio}</td>
+    //                     <td>${detalles.subtotal}</td>
+    //                     <td>${detalles.iva}</td>
+    //                     <td>${detalles.descuento}</td>
+    //                     <td>${detalles.total}</td>`
+
+    //    leeliminarar = document.createElement("td");
+    //    let btnEliminar = document.createElement("button")
+
+    //    btnEliminar.classList.add("BTNAnular");
+    //    btnEliminar.innerText = "Anular";
+
+    //    eliminar.appendChild(btnEliminar);
+    //    fila.appendChild(eliminar);
+    //    bodyV.appendChild(fila);
+
+    //    BTNAnular.onclick = (obejetDet = {}) => {
+    //        //    obejetDet.target.parentNode.parentNode.remove();
+    //        //    const Eliminar = DetallesVenta.indexOf(obejetDet);
+    //        //    DetallesVenta.splice(Eliminar, 1);
+    //        //    console.log(DetallesVenta);
+    //    }
+    //})
+
+
+
+    //let body = document.getElementById("body");
+        //body.innerHTML = "";
+        //let bodyV = document.getElementById("bodyV");
+        //bodyV.innerHTML = "";
+
+*@

@@ -14,7 +14,7 @@ namespace CAPA_NEGOCIO
         public int IdVenta { get; set; }
         public int IdProducto { get; set; }
         public int IdInventario { get; set; }
-        public decimal Cantidad { get; set; }
+        public int Cantidad { get; set; }
         public int  IdMedida { get; set; }
         public decimal Precio { get; set; }
         public decimal Subtotal { get; set; }
@@ -31,6 +31,18 @@ namespace CAPA_NEGOCIO
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        public Object VerDetalles(DetalleVenta Inst)
+        {
+            try
+            {
+                SqlADOConexion.IniciarConexion("sa", "1234");
+                return SqlADOConexion.SQLM.TakeList(TableName, Inst, null);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

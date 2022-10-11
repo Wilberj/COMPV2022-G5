@@ -31,8 +31,9 @@ namespace PROYECTO_TIENDA.Controllers
             NInventario i = new NInventario();
             Response.Add(i.GetInventario(i));
 
-            MostrarInventario I = new MostrarInventario();
-            Response.Add(I.TraerInvProc(I));
+            VistaInventario VI = new VistaInventario();
+            Response.Add(VI.TraerInventario(VI));
+
 
             return Response;
         }
