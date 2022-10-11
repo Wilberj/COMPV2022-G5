@@ -5,12 +5,12 @@
 <script type="module">
 
     import CreateTable from "../js/TableComponent.js";
-    //import CreateDropDown from "../js/DropDownComponent.js";
-
+    import CreateDropDown from "../js/DropDownComponent.js";
+    let detalle = [];
     let Producto;
 
     const CargarDatos = async () => {
-        let UrlP = "../api/Dañados/GetInventario";
+        let UrlP = "../api/ProductosDanados/TraerProductosD";
         let response = await fetch(UrlP, {
             method: "POST",
             headers: {
@@ -21,59 +21,273 @@
         response = await response.json();
         console.log(response);
         //CARGA DAÑADOS
-        CreateTable(response[0], TableData, FunctionEdit);
+        CreateTable(response[0], TableDan);
+
+        CreateDropDown(response[1], DropUsuario, "idUsuario", "usuario");
+        CreateDropDown(response[2], DropMarca, "idMarca", "marca");
+        CreateDropDown(response[3], DropTalla, "idTalla", "talla");
+        CreateDropDown(response[4], DropBodega, "idBodega", "descripcion");
+
+
+
 
         //CARGA PRODUCTO -MODAL
-        Producto = response[1]
-        CreateTable(Producto, TableDan, FunctionSeleccionar, "Seleccionar");
+        Producto = response[6]
+
+        CreateTable(Producto, TableInventario, FunctionEdit, "Seleccionar");
+
+    }
+
+    function CreateTableDetalles(Dataset = [], Table, TableFunction, BtnValue = "Edit") {
+        const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
+        const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
+        const filter = document.createElement("div");
+        filter.className = "TxtForm";
+        thead.innerHTML = "";
+        tbody.innerHTML = "";
+        //const contenedor = document.createElement("div");
+        //contenedor.className = "divcontenedor";
+
+
+        Dataset.forEach((item, index) => {
+            const row = document.createElement("tr");//filas
+            for (var prop in item) {
+
+                if (index == 0) {
+
+                    const th = document.createElement("th");//encabezados
+                    th.innerText = prop;
+                    thead.append(th);
+                }
+                const td = document.createElement("td"); //tabledata
+                td.innerText = item[prop];
+                row.append(td);
+            }
+            if (index == 0) {
+                const th = document.createElement("th");
+                th.innerText = "Action";
+                thead.append(th);
+
+            }
+            const tdAction = document.createElement("td");
+            const btn = document.createElement("input");
+            btn.type = "button";
+            btn.className = "BTN BTNOK";
+            btn.value = BtnValue;
+            btn.onclick = () => {
+                //console.log(item);
+                TableFunction(Item);
+            }
+            tdAction.append(btn);
+            row.append(tdAction);
+            tbody.append(row);
+            //contenedor.append(filter, Table);
+        });
+
+    }
+    const FunctionEdit = async (Item) => {
+
+        console.log(Item)
+        TxtIdProducto.value = Item.idProducto;
+        TxtIdInv.value = Item.idInventario;
+        TxtCoPro.value = Item.codigoProducto;
+        DropTalla.value = Item.idTalla;
+        DropMarca.value = Item.idMarca;
+        DropBodega.value = Item.idBodega;
+
+    }
+
+    BtnSaveDPD.onclick = async (Objdetalle = {}) => {
+        Objdetalle = {
+            IdInventario: TxtIdInv.value,
+            IdProducto: TxtIdProducto.value,
+            CodigoProducto: TxtCoPro.value,
+            Cantidad: TxtCantidad.value,
+            IdTalla: DropTalla.value,
+            IdMarca: DropMarca.value,
+            IdBodega: DropBodega.value
+        }
+
+        detalle.push(Objdetalle);
+        console.log(detalle)
+        detalle.forEach((objeto) => {
+            CreateTableDetalles(detalle, TableDetalle);
+
+        })
+
+        TxtIdInv.value = ""
+        TxtIdProducto.value = "";
+        TxtCoPro.value = "";
+        TxtCantidad.value = "";
+        //DropTalla.value = 0;
+        //DropMarca.value = 0;
+        //DropBodega.value = 0;
+
+    }
+
+    window.onload = async () => {
+        BtnSave.onclick = async () => {
+            let UrlDanados = "../api/ProductosDanados/SaveDan";
+            const ObjInst = {
+                IdDañados: TxtIdDan.value,
+                Fecha: TxtDateT.value,
+                Descripcion: TxtDDescripcion.value,
+                IdUsuario: DropUsuario.value,
+                Detalles: detalle
+
+            }
+            let flag = true;
+            for (var prop in ObjInst) {
+                if (ObjInst[prop] == "") {
+                    flag = false;
+                    alert("la propiedad " + prop + " es requerida");
+                    break;
+                }
+            }
+
+            if (!flag) {
+                return;
+            }
+
+            let response = await fetch(UrlDanados, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json; charset=utf-8",
+                    'Accept': "*/*"
+                },
+                body: JSON.stringify(ObjInst)
+            });
+            response = await response.json();
+            if (response == true) {
+                alert("Datos Guardados");
+                CargarDatos();
+                location.reload()
+            }
+
+            
+        }
+        CargarDatos();
+    }
+
+    CargarDatos();
+    BtnModalProducto.onclick = () => {
+        ModalFunction(ModalProducto);
+    }
+    BtnCerrarProducto.onclick = () => {
+        ModalFunction(ModalProducto);
     }
 
 </script>
 
-<div class="FrmContainer">
+<h3 style="margin:0 auto"> PRODUCTOS DAÑADOS</h3>
+
+<div class="FrmContainerPD">
     <div hidden="true">
-        Id Dañados:
+        IdProductoDañado:
         <input class="TxtForm" type="number" id="TxtIdDan" value="-1" />
     </div>
+    <div>
+        Descripcion:
+        <input class="TxtForm" type="text" id="TxtDDescripcion" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Fecha:
+        <input class="TxtForm" type="date" id="TxtDateT" placeholder="Propiedad..." />
+    </div>
+
+    <div>
+        Usuario:
+        <select class="TxtForm" id="DropUsuario">
+            <option value="0">Seleccionar Usuario</option>
+        </select>
+    </div>
+</div>
+
+@*PARA EL DETALLE DE PRODUCTO DAÑADOS*@
+<div class="FrmContainerPD">
     <div>
         IdProducto:
         <input class="TxtForm" type="number" id="TxtIdProducto" placeholder="Propiedad..." />
     </div>
     <div>
-        Inventario:
+        IdInventario:
         <input class="TxtForm" type="number" id="TxtIdInv" placeholder="Propiedad..." />
     </div>
     <div>
-        Fecha:
-        <input class="TxtForm" type="date" id="TxtDateTime" placeholder="Propiedad..." />
-    </div>
-    <div>
-        Descripcion:
-        <input class="TxtForm" type="text" id="TxtDescripcion" placeholder="Propiedad..." />
+        Codigo Producto:
+        <input class="TxtForm" type="text" id="TxtCoPro" placeholder="Propiedad..." />
     </div>
     <div>
         Cantidad:
         <input class="TxtForm" type="number" id="TxtCantidad" placeholder="Propiedad..." />
     </div>
-    
+    <div>
+        Talla:
+        <select class="TxtForm" id="DropTalla">
+            <option value="0">Seleccionar Talla</option>
+        </select>
+    </div>
+    <div>
+        Marca
+        <select class="TxtForm" id="DropMarca">
+            <option value="0">Seleccionar Marca</option>
+        </select>
+    </div>
+    <div>
+        Bodega
+        <select class="TxtForm" id="DropBodega">
+            <option value="0">Seleccionar Bodega</option>
+        </select>
+    </div>
+
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnSaveDPD" value="Guardar" />
+        <input class="BTN BTNOK2" type="button" id="BtnCerrarMI" value="Cerrar" />
+    </div>
 </div>
+
+
 <div class="FrmContainer">
     <div>
         <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
-        @*<input class="BTN BTNOK2" type="button" id="BtnModalProducto" value="Agregar Producto" />*@
+        <input class="BTN BTNOK2" type="button" id="BtnModalProducto" value="Agregar Producto" />
     </div>
 </div>
-<table id="TableData" class="FrmTable">
+
+@*TABLA PARA PRODUCTOS DAÑADOS*@
+
+<table id="TableDan" class="FrmTable">
     <thead>
     </thead>
     <tbody>
     </tbody>
 </table>
-< <table id="TableDan" class="FrmTable">
-     <thead>
-       </thead>
-        <tbody>
-      </tbody>
-  </table>
 
-        
+@*TABLA PARA LOS DETALLES*@
+<table id="TableDetalle" class="FrmTable">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@*TABLA PARA EL MODAL*@
+<div class="ModalContent" id="ModalProducto">
+    <div class="ContainerForm" style="width:max-content">
+        @*<input type="text" id="TxtBusquedaProducto" class="TxtFormDetalle" placeholder="Buscar..." value="" />*@
+        <table id="TableInventario" class="FrmTable">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <div class="FrmContainer">
+            <div>
+                <input class="BTN BTNOK2" type="button" id="BtnCerrarProducto" value="Cerrar" />
+            </div>
+        </div>
+    </div>
+</div>
+
