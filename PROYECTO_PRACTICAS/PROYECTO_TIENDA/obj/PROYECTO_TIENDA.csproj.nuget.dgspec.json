@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj": {}
+    "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj": {
+    "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
+        "projectUniqueName": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
         "projectName": "CAPA_DATOS",
-        "projectPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\obj\\",
+        "projectPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
+        "packagesPath": "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\",
+        "outputPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Isabel Aguilar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,21 +64,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
+    "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj",
+        "projectUniqueName": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj",
         "projectName": "CAPA_NEGOCIO",
-        "projectPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\obj\\",
+        "projectPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj",
+        "packagesPath": "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\",
+        "outputPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Isabel Aguilar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -88,8 +96,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj": {
-                "projectPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj"
+              "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj": {
+                "projectPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj"
               }
             }
           }
@@ -124,21 +132,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj": {
+    "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
+        "projectUniqueName": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
         "projectName": "PROYECTO_TIENDA",
-        "projectPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\obj\\",
+        "projectPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\PROYECTO_TIENDA.csproj",
+        "packagesPath": "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\",
+        "outputPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\PROYECTO_TIENDA\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Isabel Aguilar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -152,8 +164,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
-                "projectPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj"
+              "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
+                "projectPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj"
               }
             }
           }
@@ -211,12 +223,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[5.0.17, 5.0.17]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -225,7 +231,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }

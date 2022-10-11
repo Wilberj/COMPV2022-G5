@@ -454,19 +454,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\USER\\.nuget\\packages\\": {}
+    "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
+      "projectUniqueName": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
       "projectName": "CAPA_DATOS",
-      "projectPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
-      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\obj\\",
+      "projectPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\CAPA_DATOS.csproj",
+      "packagesPath": "C:\\Users\\Isabel Aguilar\\.nuget\\packages\\",
+      "outputPath": "C:\\Sistema\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Isabel Aguilar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -512,16 +517,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché C:\\Users\\USER\\Desktop\\COMPV2022-G5\\PROYECTO_PRACTICAS\\CAPA_DATOS\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
