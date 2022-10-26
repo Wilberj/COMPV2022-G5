@@ -14,13 +14,13 @@
 }
 
 .BTNOK {
-    color: #fbfbfb;
-    background-color: #2482dc;
+    color: #0f667c;
+    background-color: #3ea3af;
 }
 
 .BTNOK2 {
-    color: #fbfbfb;
-    background-color: #38983a;
+    color: #0f667c;
+    background-color: #0f667c;
 }
 
 .BTNCancel {
@@ -43,11 +43,11 @@
     padding: 10px;
     margin-left: 1rem;
     text-decoration: none;
-    color: #e5edf0;
+    color: white;
     cursor: pointer;
     border: none;
     font-weight: 100;
-    background-color: #109abd;
+    background-color: #0f667c;
 }
 
 .FrmContainerDetalleV {
@@ -105,31 +105,9 @@ select:-moz-focusring {
     box-shadow: 2px 2px 2px 2.9px rgba(0,0,0,0.3);
     border-collapse: collapse;
 }
-.TablaMaestros {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-    .TablaMaestros thead tr{
-        color: white;
-        background-color: #0f667c;
-        font-size: 16px;
-        font-weight: bold;
-        padding: 12px;
-        text-align: left;
-        vertical-align: middle;
-        text-transform: capitalize;
-        margin: 0px;
-        border: 1px solid #ddd;
-    }
-
-    .TablaMaestros thead td {
-        padding: 18px;
-        border: 1px solid #ddd;
-    }
     .FrmTable th {
         color: white;
-        background-color: #04AA6D;
+        background-color: #0f667c;
         font-size: 16px;
         font-weight: bold;
         padding: 12px;

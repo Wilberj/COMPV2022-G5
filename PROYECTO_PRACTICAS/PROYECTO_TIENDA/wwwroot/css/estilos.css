@@ -1,0 +1,68 @@
+﻿.TablaMaestros {
+    width: 65%;
+    margin:45px auto
+}
+    .TablaMaestros th {
+        color: white;
+        background-color: cadetblue;
+        font-weight: bold;
+        padding: 5px;
+        text-align: center;
+        vertical-align: middle;
+        text-transform: capitalize;
+        border: 1px solid #ddd;
+       
+    }
+    .TablaMaestros tbody tr {
+        padding: 3px;
+        text-align: center;
+        
+    }
+
+.BTNDev {
+    outline: none;
+    padding: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-weight: 100;
+}
+
+.btnRes {
+    color: white;
+    background-color: #ff0000;
+}
+.btnDan {
+    color: white;
+    background-color: #17bb1f;
+}
+.TablaDetalle {
+    width: 65%;
+    margin: 45px auto;
+    
+}
+    .TablaDetalle thead td {
+        padding: 5px;
+        text-align: center;
+        border-right: 1px solid #ddd;
+    }
+    .TablaDetalle tbody td {
+        border: 1px #000000;
+        text-align: center;
+        border-right: 1px solid #ddd;
+    }
+    .TablaDetalle thead tr {
+        color: white;
+        background-color: cadetblue;
+        font-weight: bold;
+    }
+
+    .TablaDetalle tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .TablaDetalle tr:hover {
+        background-color: #5eabad;
+    }

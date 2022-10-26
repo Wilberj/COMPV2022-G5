@@ -42,14 +42,14 @@ namespace CAPA_NEGOCIO
 
                         DV.TraerIdDV(DV);
 
-                        NInventario InvenA = new NInventario();
+                        //NInventario InvenA = new NInventario();
 
-                        var InventarioCant = (JsonConvert.DeserializeObject<DetalleDV>(Detalle.ToString())).Cantidad;
-                        var IdProducto = (JsonConvert.DeserializeObject<DetalleDV>(Detalle.ToString())).IdProducto;
-                        InvenA.DisminuirStock(InventarioCant, IdProducto);
+                        //var InventarioCant = (JsonConvert.DeserializeObject<DetalleDV>(Detalle.ToString())).Cantidad;
+                        //var IdProducto = (JsonConvert.DeserializeObject<DetalleDV>(Detalle.ToString())).IdProducto;
+                        //InvenA.DisminuirStock(InventarioCant, IdProducto);
 
-                        Ventas V = new Ventas();
-                        V.ANULAR(IdVenta);
+                        //Ventas V = new Ventas();
+                        //V.ANULAR(IdVenta);
                     }
                     return true;
 
