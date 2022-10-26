@@ -19,10 +19,10 @@
         response = await response.json();
         console.log(response);
         //CARGA IVENTARIO
-        CreateTableInventario(response[0], TableData, FunctionEdit, "Editar", FunctionDan, "Dañados");
+        CreateTableInventario(response[0], TableData, FunctionEdit, "Editar");
 
         //CARGA PRODUCTO -MODAL
-        Producto = response[4]
+        Producto = response[1]
         CreateTable(Producto, TableProducto, FunctionSeleccionar, "Seleccionar");
 
 
@@ -63,16 +63,16 @@
     }
 
     //AGREGA DATOS AL FORM DANADOS
-    const FunctionDan = async (Item) => {
+    //const FunctionDan = async (Item) => {
 
-        TxtIdProducto.value = Item.idProducto;
-        TxtIdInv.value = Item.idInventario;
-        TxtCoPro.value = Item.codigoProducto;
+    //    TxtIdProducto.value = Item.idProducto;
+    //    TxtIdInv.value = Item.idInventario;
+    //    TxtCoPro.value = Item.codigoProducto;
 
-    }
+    //}
 
     //CREATE TABLE INVENTARIO
-    export default function CreateTableInventario(Dataset = [], Table, TableFunction, BtnValue = "Edit", funcion, BtnDañado = "Añadir") {
+    export default function CreateTableInventario(Dataset = [], Table, TableFunction, BtnValue = "Edit") {
         const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
         const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
 
@@ -98,10 +98,10 @@
             }
             if (index == 0) {
                 const th = document.createElement("th");
-                const thD = document.createElement("th")
+               /* const thD = document.createElement("th")*/
                 th.innerText = "Editar";
-                thD.innerHTML = "Productos Dañados"
-                thead.append(th, thD);
+                /*thD.innerHTML = "Productos Dañados"*/
+                thead.append(th) /*, thD*/
 
             }
 
@@ -115,18 +115,18 @@
                 TableFunction(item);
             }
 
-            const tdprod = document.createElement("td");
-            const btnD = document.createElement("input");
-            btnD.type = "button";
-            btnD.className = "BTN BTNOK";
-            btnD.value = BtnDañado;
-            btnD.onclick = () => {
-                ModalFunction(ModalPD);
-                funcion(item)
-            }
+            //const tdprod = document.createElement("td");
+            //const btnD = document.createElement("input");
+            //btnD.type = "button";
+            //btnD.className = "BTN BTNOK";
+            //btnD.value = BtnDañado;
+            //btnD.onclick = () => {
+            //    ModalFunction(ModalPD);
+            //    funcion(item)
+            //}
             tdAction.append(btn);
-            tdprod.append(btnD);
-            row.append(tdAction, tdprod);
+           /* tdprod.append(btnD);*/
+            row.append(tdAction); /*, tdprod*/
             tbody.append(row);
 
         });
@@ -135,33 +135,33 @@
 
 
     // GUARDAR DAÑADOS
-    BtnSavePD.onclick = async () => {
-        const obj = {
-            IdDañados: TxtIdDan.value,
-            IdInventario: TxtIdInv.value,
-            IdProducto: TxtIdProducto.value,
-            CodigoProducto: TxtCoPro.value,
-            Fecha: TxtDateT.value,
-            Descripcion: TxtDDescripcion.value,
-            Cantidad: TxtCantidad.value
+    //BtnSavePD.onclick = async () => {
+    //    const obj = {
+    //        IdDañados: TxtIdDan.value,
+    //        IdInventario: TxtIdInv.value,
+    //        IdProducto: TxtIdProducto.value,
+    //        CodigoProducto: TxtCoPro.value,
+    //        Fecha: TxtDateT.value,
+    //        Descripcion: TxtDDescripcion.value,
+    //        Cantidad: TxtCantidad.value
 
-        }
+    //    }
 
-        let UrlD = "../api/Dan/SaveDan";
-        let response = await fetch(UrlD, {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json; charset=utf-8",
-                'Accept': "*"
-            },
-            body: JSON.stringify(obj)
-        });
-        response = await response.json();
-        if (response == true) {
-            alert("Datos Guardados");
-            ModalFunction(ModalPD);
-        }
-    }
+    //    let UrlD = "../api/Dan/SaveDan";
+    //    let response = await fetch(UrlD, {
+    //        method: "POST",
+    //        headers: {
+    //            'Content-Type': "application/json; charset=utf-8",
+    //            'Accept': "*"
+    //        },
+    //        body: JSON.stringify(obj)
+    //    });
+    //    response = await response.json();
+    //    if (response == true) {
+    //        alert("Datos Guardados");
+    //        ModalFunction(ModalPD);
+    //    }
+    //}
 
 
     /*GUARDAR INVENTARIO*/
@@ -228,9 +228,9 @@
             ModalFunction(ModalProducto);
         }
 
-        BtnCerrarPDA.onclick = () => {
-            ModalFunction(ModalPD);
-        }
+        //BtnCerrarPDA.onclick = () => {
+        //    ModalFunction(ModalPD);
+        //}
 
 
     }
@@ -318,7 +318,7 @@
 
 @*FORMULARIO PARA DAÑADOS*@
 
-<div class="ModalContentPD" id="ModalPD">
+@*<div class="ModalContentPD" id="ModalPD">
     <div class="FrmContainerPD">
         <div hidden="true">
             Id Dañados:
@@ -358,7 +358,7 @@
             <input class="BTN BTNOK2" type="button" id="BtnCerrarPDA" value="Cerrar" />
         </div>
     </div>
-</div>
+</div>*@
 
 
 

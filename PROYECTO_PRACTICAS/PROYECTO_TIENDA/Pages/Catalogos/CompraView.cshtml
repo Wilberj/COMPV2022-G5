@@ -42,22 +42,23 @@
     //SELECCION DE ITEM DE INVENTARIO
     const FunctionSeleccionar = async (Item) => {
         Txtproducto.value = Item.idProducto;
-        TxtNproducto.value = Item.producto;
+        TxtNproducto.value = Item.nombreProducto;
         TxtInvent.value = Item.idInventario;
         Txtprecio.value = Item.precioCompra;
-        TxtStockMaximo.value = Item.stockMaximo;
+       /* TxtStockMaximo.value = Item.stockMaximo;*/
         //TxtStockMinimo.value = Item.stockMinimo;
         TxtStockActual.value = Item.stockActual;
+        console.log(TxtStockMaximo.value)
         ModalFunction(ModalProducto)
     }
 
     //CALCULO DE PORCENTAJES
     Txtcantidad.onkeyup = (ev) => {
-        const stockTotal = parseInt(TxtStockActual.value) + parseInt(ev.target.value);
-        if (stockTotal > TxtStockMaximo.value) {
-            alert('Cantidad Ingresada mayor al Stock, Revisa el Inventario')
-            ModalFunction(ModalProducto)
-        }
+        //const stockTotal = parseInt(TxtStockActual.value) + parseInt(ev.target.value);
+        //if (stockTotal > TxtStockMaximo.value) {
+        //    alert('Cantidad Ingresada mayor al Stock, Revisa el Inventario')
+        //    ModalFunction(ModalProducto)
+        //}
         txtsubtotal.value = Txtprecio.value * ev.target.value;
         Txtiva.value = txtsubtotal.value * 0.15;
         Txttotal.value = parseFloat(txtsubtotal.value) + parseFloat(Txtiva.value);
@@ -283,9 +284,9 @@
 
     <div>
         Estado:
-        <select class="TxtForm" id="DropEstado">
-            <option value="1">Activo</option>
-            <option value="2">Inactivo</option>
+        <select class="TxtForm" id="DropEstado" disabled >
+            <option value="Activo">Activo</option>
+            <option value="Anulado">Anulado</option>
         </select>
     </div>
 </div>
