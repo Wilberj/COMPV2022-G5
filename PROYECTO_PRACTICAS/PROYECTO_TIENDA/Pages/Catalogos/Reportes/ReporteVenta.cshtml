@@ -1,0 +1,185 @@
+﻿@page
+@model PROYECTO_TIENDA.Pages.Catalogos.Reportes.ReporteVentaModel
+@{
+}
+<script type="module">
+   /* import CreateTableInforme from "../../js/InformeComponent.js";*/
+    import TableInforme from "../../js/Reporte.js";
+   // import CreateTable from "../../js/TableComponent.js"
+    import Tabla from "../../js/Tabla.js"
+
+    const CargarDatos = async () => {
+        let UrlP = "../../api/ReporteC/TakeInformeVenta";
+        const ObjInst = {
+            Params: [Fecha1.value, Fecha2.value]
+        }
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            },
+            body: JSON.stringify(ObjInst)
+        });
+        response = await response.json();
+        console.log(response);
+        //labelSubtitle.innerText = `Informe de Cantidad de Productos Vendidos
+        //Del ${Fecha1.value} al ${Fecha2.value}`;
+        TableInforme(response, TableData, ["fecha", "idVenta","producto","usuario","cliente","marca","talla","cantidad","precio","total"]);
+        //let sum = 0;
+        //response.forEach(element => {
+        //    sum = sum + element.cantidad;
+        //});
+        //LabelTotal.append("Producto mas Vendido" + sum)
+
+        
+       
+    }
+
+    const verDatosC = async () => {
+        let UrlP = "../../api/ReporteC/Descripcion";
+        const objInst = {
+            NombreProducto: Fecha1.value,
+          /*  Name: txtfecha2.value*/
+        }
+        let response = await fetch(UrlP, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset-utf-8",
+                'Accept': '*/*'
+            },
+            body: JSON.stringify(objInst)
+        });
+        response = await response.json();
+        console.log(response);
+        //Tabla(responseP, TableProDV)
+    }
+
+    const verDatos= async () => {
+        let UrlPMV = "../../api/ReporteC/ProdMV";
+        let responseP = await fetch(UrlPMV, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json; charset=utf-8",
+                'Accept': "*/*"
+            },
+        });
+        responseP = await responseP.json();
+        console.log(responseP)
+
+        Tabla(responseP, TableProDV)
+    }
+    
+
+    window.onload = async () => {
+        CargarDatos();
+        verDatos()
+        verDatosC()
+        BtnUpdate.onclick = () => {
+            CargarDatos();
+        }
+        BtnPrint.onclick = () => {
+            const PrintNode = Page.innerHTML;
+            const ventimp = window.open(' ', 'popimpr');
+            ventimp.document.write(PrintNode);
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+        }
+    }
+</script>
+<link rel="stylesheet" href="~/css/AppForms.css" />
+
+    <div class="conte">
+        <p style="font-weight:bold">Buscar: </p>
+        <input type="date" id="Fecha1" value="2020-01-01" />
+        <input type="date" id="Fecha2" value="2023-01-01" />
+    </div>
+
+<div class="opciones">
+    <div>
+        <input class="BTN BTNOK2" type="button" id="BtnPrint" value="Imprimir" />
+        <input class="BTN BTNOK2" type="button" id="BtnUpdate" value="Actualizar" />
+    </div>
+</div>
+
+<div class="InformeContainer">
+    <div class="page" id="Page">
+        <style>
+            .InformeContainer {
+                background-color: #b9b9b9;
+                padding: 20px;
+                height: 600px;
+                overflow: auto;
+                border: solid 2px #888;
+            }
+
+            .conte {
+                width: 20%;
+                display: flex;
+                justify-content: space-between;
+                padding-right: 5px;
+                margin: 15px 15px 15px
+            }
+
+            .page {
+                background-color: #fff;
+                width: 20cm;
+                height: 25.7cm;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 0.5cm;
+                box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+                padding: 1cm 2cm;
+            }
+
+            h1, h4 {
+                text-align: center;
+            }
+
+            .TableInforme {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+
+                .TableInforme thead th {
+                    text-align: center;
+                    font-size: 16px;
+                    border: solid 1px #b9b9b9;
+                    background-color: cadetblue;
+                    text-transform: capitalize;
+                }
+
+
+                .TableInforme tbody td {
+                    text-align: center;
+                    font-size: 15px;
+                    border-bottom: solid 1px #b9b9b9;
+                }
+        </style>
+
+        <section>
+            <h1>
+                Informe
+            </h1>
+
+            <h4 id="labelSubtitle">
+            </h4>
+        </section>
+        <table id="TableData" class="TableInforme">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <table id="TableProDV" class="TableInforme">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        @*<hr />
+        <label id="LabelTotal">Total: </label>*@
+    </div>
+</div>
