@@ -5,7 +5,7 @@
 <script type="module">
     import CreateTable from '../../js/TableComponent.js';
     import CreateDropDown from '../../js/DropDownComponent.js';
-    const DetallesVenta = [];
+    let DetallesVenta = [];
     let venta;
 
     const CargarDatos = async () => {
@@ -23,8 +23,8 @@
         //CARGAR TODOS LAS LISTAS
         console.log(response);
 
-        //CARGA TABLA COMPRA
-        CreateTable(venta, TableVenta);
+        //CARGA TABLA VENTA
+        // CreateTable(venta, TableVenta);
 
         //MODAL INVENTARIO
         CreateTable(response[5], TableProducto, FunctionSeleccionar, "Seleccionar");
@@ -35,6 +35,7 @@
         CreateDropDown(response[4], DropMedida, "idMedida", "medida")
 
     }
+
     //SELECCION DE ITEM DE INVENTARIO
     const FunctionSeleccionar = async (Item) => {
         Txtproducto.value = Item.idProducto;
@@ -51,133 +52,216 @@
         //    alert('Cantidad Ingresada mayor al Stock, Revisa el Inventario')
         //    ModalFunction(ModalProducto)
         //}
+
+
         txtsubtotal.value = Txtprecio.value * ev.target.value;
         Txtiva.value = txtsubtotal.value * 0.15;
-        Txttotal.value = parseFloat(txtsubtotal.value) + parseFloat(Txtiva.value);
+
+        if (txtsubtotal.value > 8000 && txtsubtotal.value < 14999) {
+            TxtDescuento.value = txtsubtotal.value * 0.03;
+
+        } else if (txtsubtotal.value > 15000) {
+            TxtDescuento.value = txtsubtotal.value * 0.05;
+        } else {
+            TxtDescuento.value = 0;
+
+        }
+
+        Txttotal.value = parseFloat(txtsubtotal.value) + parseFloat(Txtiva.value) - parseFloat(TxtDescuento.value)
+
     }
 
-    //CALCULO DE DESCUENTO
-    TxtDescuento.onkeyup = (ev) => {
-        Txttotal.value = parseFloat(Txttotal.value) - ev.target.value;
-    }
+    //////TEXTO DE BUSQUEDA
+    //TxtBusquedaVenta.onkeyup = (ev) => {
+    //    const parametro = ev.target.value;
+    //    const VentaFiltrados = venta.filter(x => x.descripcion.includes(parametro));
+    //    CreateTable(VentaFiltrados, TableVenta);
+    //}
 
-    ////TEXTO DE BUSQUEDA
-    TxtBusquedaVenta.onkeyup = (ev) => {
-        const parametro = ev.target.value;
-        const VentaFiltrados = venta.filter(x => x.descripcion.includes(parametro));
-        CreateTable(VentaFiltrados, TableVenta);
-    }
-
-    ////TEXTO DE BUSQUEDA INVENTARIO
+    //TEXTO DE BUSQUEDA INVENTARIO
     TxtBusquedaProducto.onkeyup = (ev) => {
         const parametro = ev.target.value;
         const InvenFiltrados = response[5].filter(x => x.producto.includes(parametro));
         CreateTable(InvenFiltrados, TableProducto);
     }
 
+    //TABLA PARA DETALLES
+    function creaTabla() {
+        let body = document.getElementById("body");
+        body.innerHTML = "";
+        DetallesVenta.forEach((detalles) => {
+            let fila = document.createElement("tr");
+            fila.innerHTML = `
+                             <td hidden="true" >${detalles.IdProducto}</td>
+                             <td hidden="true" >${detalles.IdInventario}</td>
+                             <td>${TxtNproducto.value}</td>
+                             <td>${detalles.Precio}</td>
+                             <td>${detalles.Cantidad}</td>
+                             <td>${detalles.IdMedida}</td>
+                             <td>${detalles.Subtotal}</td>
+                             <td>${detalles.IVA}</td>
+                             <td>${detalles.Descuento}</td>
+                             <td>${detalles.Total}</td>`
+            let eliminar = document.createElement("td");
+            let btnEliminar = document.createElement("button")
 
-    ////// TABLA PARA DETALLE
-    export default function CreateTableDetalle(Dataset = [], Table, TableFunction, BtnValue = "Eliminar") {
-        const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
-        const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
-        thead.innerHTML = "";
-        tbody.innerHTML = "";
-        Dataset.forEach((item, index) => {
-            const row = document.createElement("tr");//filas
-            for (var prop in item) {
+            btnEliminar.classList.add("BTNEliminar");
+            btnEliminar.innerText = "Eliminar";
 
-                if (index == 0) {
+            eliminar.appendChild(btnEliminar);
+            fila.appendChild(eliminar);
+            body.appendChild(fila);
 
-                    const th = document.createElement("th");//encabezados
-                    th.innerText = prop;
-                    thead.append(th);
-                }
-                const td = document.createElement("td"); //tabledata
-                td.innerText = item[prop];
-                row.append(td);
-            }
-            if (index == 0) {
-                const th = document.createElement("th");
-                th.innerText = "Eliminar";
-                thead.append(th);
-
-            }
-            const tdAction = document.createElement("td");
-            const btn = document.createElement("input");
-            btn.type = "button";
-            btn.className = "BTN BTNOK";
-            btn.value = BtnValue;
-            btn.onclick = (obejetDet = {}) => {
+            btnEliminar.onclick = (obejetDet = {}) => {
                 obejetDet.target.parentNode.parentNode.remove();
                 const Eliminar = DetallesVenta.indexOf(obejetDet);
                 DetallesVenta.splice(Eliminar, 1);
                 console.log(DetallesVenta);
             }
-            tdAction.append(btn);
-            row.append(tdAction);
+        })
 
-            tbody.append(row);
-        });
+
     }
 
+    //VERIFICAR ARTICULO REPETIDO
+    const InsertarProducto = (objDetalle) => {
+        const repetido = DetallesVenta.find((detalle) => {
+            if (objDetalle.IdProducto == detalle.IdProducto) {
+                return detalle;
+            }
+        });
+
+        if (repetido) {
+            DetallesVenta = DetallesVenta.map((detalle) => {
+                if (detalle.IdProducto == objDetalle.IdProducto) {
+                    return {
+                        IdInventario: detalle.IdInventario,
+                        IdProducto: detalle.IdProducto,
+                        Precio: detalle.Precio,
+                        Cantidad: +detalle.Cantidad + +objDetalle.Cantidad,
+                        IdMedida: detalle.IdMedida,
+                        Subtotal: +detalle.Subtotal + +objDetalle.Subtotal,
+                        IVA: +detalle.IVA + +objDetalle.IVA,
+                        Descuento: +detalle.Descuento + +objDetalle.Descuento,
+                        Total: +detalle.Total + +objDetalle.Total
+                    };
+                }
+                return detalle;
+            });
+
+        }
+        else {
+            DetallesVenta.push(objDetalle);
+            console.log(DetallesVenta)
+        }
+    };
+
     btnDetalle.onclick = async (Objdetalle = {}) => {
-        let cantidad = document.getElementById('Txtcantidad');
-        let producto = document.getElementById('Txtproducto');
+
+        Objdetalle = {
+            IdInventario: TxtInvent.value,
+            IdProducto: Txtproducto.value,
+            Precio: Txtprecio.value,
+            Cantidad: Txtcantidad.value,
+            IdMedida: DropMedida.value,
+            Subtotal: txtsubtotal.value,
+            IVA: Txtiva.value,
+            Descuento: TxtDescuento.value,
+            Total: Txttotal.value
+        }
 
 
-        if (TxtDescuento.value == "" || undefined) TxtDescuento.value = 0
-
-        if (cantidad.value === '' || producto.value === '') {
-            alert('Rellena el todos los campos')
-
-
-        } else {
-
-            Objdetalle = {
-                IdInventario: TxtInvent.value,
-                IdProducto: Txtproducto.value,
-                Precio: Txtprecio.value,
-                Cantidad: Txtcantidad.value,
-                IdMedida: DropMedida.value,
-                Subtotal: txtsubtotal.value,
-                IVA: Txtiva.value,
-                Descuento: TxtDescuento.value,
-                Total: Txttotal.value
+        let flag = true;
+        for (var prop in Objdetalle) {
+            if (Objdetalle[prop] === "") {
+                flag = false;
+                alert("la propiedad " + prop + " es requerida");
+                break;
             }
         }
-        DetallesVenta.push(Objdetalle);
+
+        if (!flag) {
+            return;
+        }
+
+        InsertarProducto(Objdetalle)
+        //DetallesVenta.push(Objdetalle);
         console.log(DetallesVenta);
+        creaTabla();
 
-        DetallesVenta.forEach((objeto) => {
-            CreateTableDetalle(DetallesVenta, TableVD);
-
-        })
         // SUMA TOTAL DETALLES
         function sumaTotales(DetallV) {
-            const suma = DetallV.map(D => D.Total).reduce((a, v) => parseInt(a) + parseInt(v), 1);
+            const suma = DetallV.map(D => D.Total).reduce((a, v) => parseFloat(a) + parseFloat(v), 0);
             TxttotalV.value = suma;
 
         }
+
         sumaTotales(DetallesVenta);
 
+        //LIMPIA TXT DESPUES DE GUARDAR
+        Txtproducto.value = ""
+        TxtNproducto.value = ""
+        Txtcantidad.value = ""
+        TxtInvent.value = ""
+        Txtprecio.value = ""
+        Txtiva.value = ""
+        txtsubtotal.value = ""
+        Txttotal.value = ""
+        TxtDescuento.value = ""
+        DropMedida.value = "0"
 
-        //MODALDETALLE
-        ModalFunction(ModalDetalle);
+        if (DetallesVenta.length != 0) {
+            BtnSave.disabled = false;
+        } else {
+            BtnSave.disabled = true;
+        }
 
-        //Txtproducto.value = ""
-        //TxtNproducto.value = ""
-        //Txtcantidad.value = ""
-        //TxtInvent.value = ""
-        //Txtprecio.value = ""
-        //Txtiva.value = ""
-        //txtsubtotal.value = ""
-        //Txttotal.value = ""
-        //TxtDescuento.value = ""
     }
+
+
+    //function CreaFactura() {
+    //    let cuerpo2 = document.getElementById("cuerpo2");
+    //    cuerpo2.innerHTML = "";
+    //    let subtotal = DetallesVenta.map(S => S.Subtotal).reduce((a, v) => parseFloat(a) + parseFloat(v), 0)
+
+    //    DetallesVenta.forEach((detalles) => {
+
+    //        let fila = document.createElement("tr");
+    //        fila.innerHTML = `
+
+    //        <td class="td-item">${detalles.IdProducto}</td>
+    //        <td class="td-item">${detalles.Cantidad}</td>
+    //        <td class="td-item">${detalles.Precio}</td>
+    //        <td class="td-item">${detalles.Total}</td>
+    //        `
+    //        cuerpo2.appendChild(fila);
+    //    })
+    //    let fila2 = document.createElement("tr");
+    //    fila2.innerHTML = `
+
+    //        <td colspan="2" rowspan="3" valign="bottom"</td>
+    //        <td class="td-item"><p class="item-2">SubTotal</p></td>
+    //        <td class="item-3"><p>${subtotal}</p></td>
+           
+    //        `
+    //    cuerpo2.appendChild(fila2);
+   // }
 
     /*GUARDA VENTA*/
 
+
+
     window.onload = async () => {
+
+
+        //CreaFactura()
+
+        //if (DetallesVenta.length == 0) {
+        //    BtnSave.disabled = "true";
+        //} else {
+        //    BtnSave.disabled = "false";
+        //}
+
         BtnSave.onclick = async () => {
             let UrlVenta = "../../api/Venta/GuardarVenta";
             const ObjInst = {
@@ -233,20 +317,98 @@
             ModalFunction(ModalProducto);
         }
 
-        BtnModalDetalle.onclick = () => {
-            ModalFunction(ModalDetalle);
-        }
-        BtnCerrarD.onclick = () => {
-            ModalFunction(ModalDetalle);
-        }
+
     }
-    
+
 
 
 </script>
 
+<style>
+    .contenedor {
+        width: 900px !important;
+        height: 842px !important;
+        margin: auto;
+    }
+
+    .pie_pagina {
+        position: fixed;
+        width: 100%;
+        text-align: center;
+        bottom: 0;
+        margin: auto;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif
+    }
+
+    p.title {
+        font-weight: bold;
+    }
+
+    p.title2 {
+        font-weight: bold;
+        color: #03A99F;
+        font-size: 20px;
+    }
+
+    p.text {
+        font-size: 15px;
+        font-weight: 100;
+        color: #858585;
+    }
+
+    p {
+        margin: 0px
+    }
+
+    .tbth {
+        text-align: left;
+    }
+
+    table.tbproductos {
+        border-collapse: separate;
+        border-spacing: 4px;
+    }
+
+        table.tbproductos thead tr th {
+            background-color: #03A99F;
+            padding: 10px;
+            font-size: 15px;
+            color: white;
+        }
+
+        table.tbproductos tbody tr td {
+            padding: 10px;
+        }
+
+    .item {
+        font-size: 15px;
+        font-weight: 100;
+        color: #757575;
+    }
+
+    .item-2 {
+        font-size: 15px;
+        font-weight: bold;
+        color: #757575;
+    }
+
+    .item-3 {
+        font-size: 15px;
+        font-weight: bold;
+        background-color: #03A99F;
+        color: white;
+    }
+
+    .td-item {
+        border-bottom: 2px solid #E8E8E8 !important;
+    }
+</style>
+
 @*FORMULARIO DE VENTA*@
-<div class="FrmContainer">
+<div class="FrmContainerDetalleV">
 
     <div hidden="true">
         IdVenta:
@@ -288,98 +450,106 @@
             <option value="Inactivo">Inactivo</option>
         </select>
     </div>
-</div>
-
-@*FORMULARIO DETALLESVENTA*@
-
-<div class="ModalContentDetalle" id="ModalDetalle">
-
-    <div class="FrmContainerDetalle">
-
-        <div hidden="true">
-            IdProducto:
-            <input class="TxtForm" type="number" id="Txtproducto" placeholder="Producto" disabled />
-        </div>
-
-        <div style="display:flex;">
-            <div>
-                Producto:
-                <input class="TxtForm" type="text" id="TxtNproducto" placeholder="Producto" disabled />
-            </div>
-
-            <input type="button" id="BtnModalProducto" class="BTN BTNOK2" value="Insertar Producto" style="height:40px; margin-top:30px;margin-left:20px" />
-        </div>
-
-        <div hidden="true">
-            IdInventario:
-            <input class="TxtForm" type="number" id="TxtInvent" disabled />
-        </div>
-
-        <div>
-            Cantidad:
-            <input class="TxtForm" type="number" id="Txtcantidad" />
-        </div>
-
-        <div>
-            Medida:
-            <select class="TxtForm" id="DropMedida">
-                <option value="0">Seleccionar Medida</option>
-            </select>
-        </div>
-
-        <div>
-            Precio:
-            <input class="TxtForm" type="number" id="Txtprecio" placeholder="Propiedad..." disabled />
-        </div>
-
-        <div>
-            Subtotal:
-            <input class="TxtForm" type="number" id="txtsubtotal" placeholder="Propiedad..." disabled />
-        </div>
-
-        <div>
-            IVA:
-            <input class="TxtForm" type="number" id="Txtiva" placeholder="Propiedad..." disabled />
-        </div>
-
-        <div>
-            Descuento:
-            <input class="TxtForm" type="number" id="TxtDescuento" placeholder="Propiedad..." />
-        </div>
-
-        <div>
-            Total:
-            <input class="TxtForm" type="number" id="Txttotal" placeholder="Propiedad..." disabled />
-        </div>
-
-
-        <div>
-            <button class="BTN BTNOK2" id="btnDetalle">Guardar Detalles</button>
-            <input class="BTN BTNOK2" type="button" id="BtnCerrarD" value="Cerrar" style="margin-top:30px" />
-
-        </div>
-
-    </div>
-
-
-</div>
-
-
-@*botones*@
-<div class="FrmContainer">
     <div>
-        <input class="BTN BTNOK2" type="button" id="BtnSave" value="Guardar" />
-        <input class="BTN BTNOK2" type="button" id="BtnModalDetalle" value="Insertar Detalle" style="margin-right:120px" />
+        <input class="BtnGuardarV" type="button" id="BtnSave" value="Guardar" />
+
+    </div>
+</div>
+
+
+@*FORMULARIO DETALLE*@
+
+<div class="FrmContainerDetalleV">
+
+    <div hidden="true">
+        IdProducto:
+        <input class="TxtForm" type="number" id="Txtproducto" placeholder="Producto" disabled />
+    </div>
+
+    <div style="display:flex;">
+        <div>
+            Producto:
+            <input class="TxtForm" type="text" id="TxtNproducto" placeholder="Producto" disabled />
+        </div>
+
+        <input type="button" id="BtnModalProducto" class="BtnGuardarV" value="+" style="height:40px; margin-top:30px;margin-left:20px" />
+    </div>
+
+    <div hidden="true">
+        IdInventario:
+        <input class="TxtForm" type="number" id="TxtInvent" disabled />
+    </div>
+
+    <div>
+        Cantidad:
+        <input class="TxtForm" type="number" id="Txtcantidad" />
+    </div>
+
+    <div>
+        Medida:
+        <select class="TxtForm" id="DropMedida">
+            <option value="0">Seleccionar Medida</option>
+        </select>
+    </div>
+
+    <div>
+        Precio:
+        <input class="TxtForm" type="number" id="Txtprecio" placeholder="Propiedad..." disabled />
+    </div>
+
+    <div hidden="true">
+        Subtotal:
+        <input class="TxtForm" type="number" id="txtsubtotal" placeholder="Propiedad..." disabled />
+    </div>
+
+    <div hidden="true">
+        IVA:
+        <input class="TxtForm" type="number" id="Txtiva" placeholder="Propiedad..." disabled />
+    </div>
+
+    <div>
+        Descuento:
+        <input class="TxtForm" type="number" id="TxtDescuento" placeholder="Propiedad..." disabled />
+    </div>
+
+    <div hidden="true">
+        Total:
+        <input class="TxtForm" type="number" id="Txttotal" placeholder="Propiedad..." disabled />
+    </div>
+    <div>
+        <button class="BtnGuardarV" id="btnDetalle" style="margin-top:32px">Guardar Detalles</button>
     </div>
 
 
+
 </div>
+
 
 
 @*CREACION DE TABLAS*@
+<table class="TablaDetalle">
+    <thead>
+        <tr>
+            <td hidden="true">IdInventario</td>
+            <td hidden="true">IdProducto</td>
+            <td>Articulo</td>
+            <td>Precio</td>
+            <td>Cantidad</td>
+            <td>Medida</td>
+            <td>Subtotal</td>
+            <td>IVA</td>
+            <td>Descuento</td>
+            <td>Total</td>
+            <td>Eliminar</td>
+        </tr>
+    </thead>
+    <tbody id="body">
+    </tbody>
+
+</table>
 
 @*TABLA PARA VENTA*@
-<div>
+<!--<div>
     <input type="text" class="TxtFormDetalle" id="TxtBusquedaVenta" placeholder="Buscar..." value="" />
     <table id="TableVenta" class="FrmTable">
         <thead>
@@ -387,20 +557,14 @@
         <tbody>
         </tbody>
     </table>
-</div>
-
-@*TABLA PARA VER EL DETALLLE*@
-<table id="TableVD" class="FrmTable">
-    <thead>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-
-
+</div>-->
 @*TABLA PARA EL MODAL*@
 <div class="ModalContent" id="ModalProducto">
-    <div class="ContainerForm" style="width:max-content">
+
+    <div class="ContainerForm">
+        <div style=" display:flex; justify-content:flex-end">
+            <input class="" type="button" id="BtnCerrarProducto" value="X" style="background-color: red; border: none; font-weight: 100; outline: none;color:aliceblue" />
+        </div>
         <input type="text" id="TxtBusquedaProducto" class="TxtFormDetalle" placeholder="Buscar..." value="" />
         <table id="TableProducto" class="FrmTable">
             <thead>
@@ -408,11 +572,120 @@
             <tbody>
             </tbody>
         </table>
-
-        <div class="FrmContainer">
-            <div>
-                <input class="BTN BTNOK2" type="button" id="BtnCerrarProducto" value="Cerrar" />
-            </div>
-        </div>
     </div>
 </div>
+
+<div class="ModalContent" id="ModalAlerta">
+    <h3> Venta Guardada Exitosamente</h3>
+    <input class="BTN BTNOK2" type="button" id="BtnAceptar" value="Aceptar" />
+</div>
+
+
+<!--<div id="ModalFactura">-->
+    @*class="ModalContent"*@
+    <!--<div class="contenedor">
+
+        <table style="width:100%" id="idventa">
+            <tr>
+                <td>
+                    <img src="~/Image/reporte.png" style="width: 250px;" />
+                </td>
+                <td style="text-align:right">
+                    <table style="margin-right:0;margin-left:auto">
+                        <tr><td><p class="title2">NÚMERO VENTA</p></td></tr>
+                        <tr><td>numeroventa:</td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <p class="title">TIENDA EL HERMANO</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><p class="text">Direccion: Av. Amarilis Park 123</p></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="text">Correo: ELHERMANOe@example.com</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="text-align:right">
+                    <table style="margin-right:0;margin-left:auto">
+                        <tr>
+                            <td><p class="title">CLIENTE</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="text">nombrecliente</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="text">correocliente</p></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+
+        <table class="tbproductos" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="tbth">Producto</th>
+                    <th class="tbth" style="width:130px">Cantidad</th>
+                    <th class="tbth" style="width:130px">Precio</th>
+                    <th class="tbth" style="width:130px">Total</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo2">-->
+                @*<tr>
+                        <td class="td-item"><p class="item">producto</p></td>
+                        <td class="td-item"><p class="item">cantidad</p></td>
+                        <td class="td-item"><p class="item">precio</p></td>
+                        <td style="background-color:#EDF6F9"><p class="item">total</p></td>
+                    </tr>*@
+
+                <!--<tr>
+                    <td colspan="2" rowspan="3" valign="bottom">
+                    </td>
+                    <td class="td-item">
+                        <p class="item-2">SubTotal</p>
+                    </td>
+                    <td class="item-3">
+                        <p>subtotal</p>
+                    </td>
+                </tr>
+                <tr>-->
+                    @* <td colspan="2"></td>*@
+                    <!--<td class="td-item">
+                        <p class="item-2">IVA</p>
+                    </td>
+                    <td class="item-3">
+                        <p>impuesto</p>
+                    </td>
+                </tr>
+                <tr>-->
+                    @*<td colspan="2"></td>*@
+                    <!--<td class="item-3">
+                        <p>Total</p>
+                    </td>
+                    <td class="item-3">
+                        <p>total</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>-->
+
+@*ModalFunction(ModalAlerta);*@

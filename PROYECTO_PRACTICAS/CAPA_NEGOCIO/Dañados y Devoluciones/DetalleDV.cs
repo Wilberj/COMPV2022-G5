@@ -15,7 +15,7 @@ namespace CAPA_NEGOCIO
         public int IdInventario { get; set; }
         public int IdProducto { get; set; }
         public int Cantidad { get; set; }
-        public int Total { get; set; }
+        public decimal Total { get; set; }
         public string Estado{ get; set; }
 
 

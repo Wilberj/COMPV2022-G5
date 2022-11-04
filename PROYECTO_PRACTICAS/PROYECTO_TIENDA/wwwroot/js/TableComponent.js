@@ -1,8 +1,7 @@
 ﻿export default function CreateTable(Dataset = [], Table, TableFunction, BtnValue = "Edit") {
     const thead = Table.querySelector("thead"); //dataset= response, table=nombre de la tabla-tableproducto,?,?
     const tbody = Table.querySelector("tbody");//tbody = cuerpo de tabla, thead=encabezado de tabla
-    const filter = document.createElement("div");
-    filter.className = "TxtForm";
+    
     thead.innerHTML = "";
     tbody.innerHTML = "";
     //const contenedor = document.createElement("div");
